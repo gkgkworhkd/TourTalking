@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.ListView;
 
 import com.example.user.myapplication.R;
-import com.example.user.myapplication.chat.ChatActivity;
+import com.example.user.myapplication.List.ListActivity;
 
 /**
  * Created by user on 2017-02-14.
@@ -42,8 +42,7 @@ public class CompanyActivity extends AppCompatActivity{
     public void CompanyBt(View view){
         switch (view.getId()) {
             case R.id.item_company:
-                Intent intent=new Intent(this, ChatActivity.class);
-                startActivity(intent);
+
                 break;
 
         }

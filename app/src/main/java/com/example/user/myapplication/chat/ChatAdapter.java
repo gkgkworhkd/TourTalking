@@ -6,21 +6,21 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 /**
- * Created by user on 2017-02-14.
+ * Created by user on 2017-02-16.
  */
 
-public class ChatListAdapter extends BaseAdapter {
-
+public class ChatAdapter extends BaseAdapter {
     Context context;
-    int code;
-    public ChatListAdapter(Context context,int code) {
+    int[] chatSize;
+    int sum;
+    public ChatAdapter(Context context,int[] chatSize) {
         this.context = context;
-        this.code=code;
+        this.chatSize=chatSize;
     }
 
     @Override
     public int getCount() {
-        return 8;
+        return chatSize.length;
     }
 
     @Override
@@ -36,12 +36,14 @@ public class ChatListAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = null;
-        if(code==ChatFragmentAdapter.CHFRGID [0]){
-            view=new ChatItem(context);
-        }else if(code==ChatFragmentAdapter.CHFRGID [1]){
-            view=new ChatItem(context);
+        if (chatSize[sum] == ChatActivity.REVMESSAGE) {
+            String[] recvMsg=new String[2];
+            view=new ReceiveMessage(context,recvMsg);
+        } else if (chatSize[sum]== ChatActivity.SENDMESSAGE) {
+            String sendMsg="보낼 메세지";
+            view=new SendMessage(context,sendMsg);
         }
+        if(sum<chatSize.length)sum++;
         return view;
     }
-
 }

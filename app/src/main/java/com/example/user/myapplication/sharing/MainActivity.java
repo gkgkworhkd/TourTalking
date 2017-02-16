@@ -8,12 +8,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Switch;
 
+import com.example.user.myapplication.List.ListActivity;
 import com.example.user.myapplication.R;
-import com.example.user.myapplication.chat.ChatFragmentAdapter;
-import com.example.user.myapplication.chat.Test;
-import com.example.user.myapplication.company.CompanyActivity;
+import com.example.user.myapplication.List.ListFragmentAdapter;
 
 public class MainActivity extends AppCompatActivity {
     String TAG;
@@ -21,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     MyPagerAdapter myPagerAdapter;
     ViewPager viewPager;
     static public MainActivity mainActivity;
-    public ChatFragmentAdapter adapter;
+    public ListFragmentAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,9 +64,11 @@ public class MainActivity extends AppCompatActivity {
     public void MainBt(View view) {
         switch (view.getId()) {
             case R.id.talk_img:
-                viewPager.setCurrentItem(1);
+                Intent intent=new Intent(this, ListActivity.class);
+                startActivity(intent);
                 break;
             case R.id.trv_img:
+                viewPager.setCurrentItem(1);
                 break;
             case R.id.spe_img:
                 break;

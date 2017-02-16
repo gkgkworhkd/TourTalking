@@ -3,7 +3,7 @@
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="match_parent">
 <ImageView
-    android:id="@+id/img_member"
+    android:id="@+id/chat_member_img"
     android:src="@drawable/officeman"
     android:layout_weight="1"
     android:layout_width="0dp"
@@ -11,7 +11,7 @@
     <TextView
         android:gravity="center_vertical"
         android:text="좋은 여행사"
-        android:id="@+id/content_member"
+        android:id="@+id/chat_member_name"
         android:layout_weight="3"
         android:layout_width="0dp"
         android:layout_height="match_parent" />

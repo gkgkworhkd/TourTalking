@@ -1,4 +1,4 @@
-package com.example.user.myapplication.chat;
+package com.example.user.myapplication.List;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,16 +12,16 @@ import com.example.user.myapplication.R;
  * Created by user on 2017-02-14.
  */
 
-public class ChatFragmentAdapter extends FragmentStatePagerAdapter{
+public class ListFragmentAdapter extends FragmentStatePagerAdapter{
     private String TAG;
     Fragment[] myFragment = new Fragment[2];
-    public static int[] CHFRGID = {R.layout.chat_member_fragment,R.layout.chat_list_fragment};
+    int[] ChfrgId = {R.layout.chatlist_member_fragment,R.layout.chatlist_list_fragment};
 
-    public ChatFragmentAdapter(FragmentManager fm) {
+    public ListFragmentAdapter(FragmentManager fm) {
         super(fm);
         TAG=this.getClass().getSimpleName();
-        for (int i = 0; i < CHFRGID .length; i++) {
-            createFragmnet(CHFRGID [i], i);
+        for (int i = 0; i < ChfrgId .length; i++) {
+            createFragmnet(ChfrgId [i], i);
         }
     }
 
@@ -36,7 +36,7 @@ public class ChatFragmentAdapter extends FragmentStatePagerAdapter{
 
     @Override
     public int getCount() {
-        return CHFRGID .length;
+        return ChfrgId .length;
     }
 
     @Override

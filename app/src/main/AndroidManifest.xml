@@ -21,15 +21,19 @@
 
         </activity>
         <activity android:name=".company.CompanyActivity"></activity>
-        <activity android:name=".chat.ChatActivity">
+        <activity android:name=".List.ListActivity">
+
+        </activity>
+        <activity android:name=".profile.ProfileActivity" />
+        <activity android:name=".chat.ChatActivity"
+            android:windowSoftInputMode="adjustPan"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".chat.MemberList"></activity>
-        <activity android:name=".profile.ProfileActivity"/>
     </application>
 
 </manifest>
