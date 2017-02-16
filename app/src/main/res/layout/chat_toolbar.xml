@@ -1,0 +1,17 @@
+<android.support.v7.widget.Toolbar
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="#fffef4"
+    android:layout_alignParentTop="true"
+    android:layout_centerHorizontal="true"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+    <TextView
+        android:gravity="center_vertical"
+        android:text="대화하기"
+        android:textSize="@dimen/activity_horizontal_margin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    </android.support.v7.widget.Toolbar>
+
+

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.user.myapplication">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <!--
+            화면고정해주는 속성 키보드밀림방지
+            android:windowSoftInputMode="adjustPan"
+        -->
+        <activity
+            android:name=".sharing.MainActivity"
+            android:windowSoftInputMode="adjustPan">
+
+        </activity>
+        <activity android:name=".company.CompanyActivity"></activity>
+        <activity android:name=".chat.ChatActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".chat.MemberList"></activity>
+        <activity android:name=".profile.ProfileActivity"/>
+    </application>
+
+</manifest>
