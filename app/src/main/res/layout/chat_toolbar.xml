@@ -18,13 +18,16 @@
             android:layout_width="0dp"
             android:layout_height="match_parent" />
         <TextView
+            android:id="@+id/chat_back"
             android:text="뒤로가기"
             android:textStyle="bold"
             android:textAlignment="textEnd"
             android:gravity="end|center_vertical"
             android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:onClick="Chat_OnClick"
+            />
     </LinearLayout>
 
     </android.support.v7.widget.Toolbar>

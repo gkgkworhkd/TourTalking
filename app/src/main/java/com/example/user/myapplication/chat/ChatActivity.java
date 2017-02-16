@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ListView;
 
 import com.example.user.myapplication.R;
@@ -28,5 +29,7 @@ public class ChatActivity extends AppCompatActivity{
         listView.setStackFromBottom(true);
         listView.setAdapter(adapter);
     }
-
+    public void Chat_OnClick(View view){
+       finish();
+    }
 }

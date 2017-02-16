@@ -20,6 +20,7 @@ public class ListFragments extends Fragment {
     private String TAG;
     ListView chat_listView;
     ListActivity context;
+    MyListViewOnItemClickListener listener;
     public ListFragments() {
         TAG = this.getClass().getSimpleName();
         Log.d(TAG, "ListFragments 가 실행됨");
@@ -33,28 +34,16 @@ public class ListFragments extends Fragment {
         id = (int) bundle.get("c_pageId");
         Log.d(TAG, "id 는?" + id);
         View view = inflater.inflate(id, container, false);
-        context=(ListActivity) getContext();
+        context = (ListActivity) getContext();
         if (id == R.layout.chatlist_member_fragment) {
-            setMemberList(view);
+            chat_listView = (ListView) view.findViewById(R.id.listView_friendList);
         } else if (id == R.layout.chatlist_list_fragment) {
-            setChatList(view);
+            chat_listView = (ListView) view.findViewById(R.id.listView_chatList);
         }
+        ListAdapter listAdapter = new ListAdapter(context, id);
+        listener=new MyListViewOnItemClickListener(context,id);
+        chat_listView.setOnItemClickListener(listener);
+        chat_listView.setAdapter(listAdapter);
         return view;
     }
-
-    public void setMemberList(View view){
-        chat_listView=(ListView) view.findViewById(R.id.listView_friendList);
-        ListAdapter listAdapter=new ListAdapter(context,id);
-        chat_listView.setAdapter(listAdapter);
-
-    }
-    public void setChatList(View view){
-        chat_listView=(ListView) view.findViewById(R.id.listView_chatList);
-        ListAdapter listAdapter=new ListAdapter(context,id);
-        chat_listView.setAdapter(listAdapter);
-
-    }
-
-
-
 }

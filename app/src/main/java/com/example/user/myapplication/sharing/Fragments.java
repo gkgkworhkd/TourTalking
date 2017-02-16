@@ -31,7 +31,7 @@ public class Fragments extends android.support.v4.app.Fragment {
     MainActivity context;
     ListView[] myListView = new ListView[3];
     ListView companyListView;
-    android.os.Handler handler=new android.os.Handler(){
+    android.os.Handler handler = new android.os.Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
@@ -112,22 +112,7 @@ public class Fragments extends android.support.v4.app.Fragment {
             @Override
             public void onGroupExpand(int groupPosition) {
                 Toast.makeText(context, listDataHeader.get(groupPosition) + "EXPANDED", Toast.LENGTH_SHORT).show();
-                Thread thread=new Thread(){
-                    @Override
-                    public void run() {
-                        super.run();
-                        try {
-                            Thread.sleep(2000);
-                            handler.sendEmptyMessage(0);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
 
-                    }
-                };
-                thread.start();
-                Intent intent=new Intent(context,CompanyActivity.class);
-                context.startActivity(intent);
 
             }
         });
@@ -140,11 +125,20 @@ public class Fragments extends android.support.v4.app.Fragment {
         });
         //차일드 뷰를 눌럿을 경우 이벤트 발생
         expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-            //TODO CHILDVIEW 가 안눌림
+
             @Override
-            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                Toast.makeText(context, listDataHeader.get(groupPosition) + ":" + listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition), Toast.LENGTH_SHORT).show();
-                /*Thread thread=new Thread(){
+            public boolean onChildClick(ExpandableListView parent, View v,
+                                        int groupPosition, int childPosition, long id) {
+                // TODO Auto-generated method stub
+                Toast.makeText(
+                        context,
+                        listDataHeader.get(groupPosition)
+                                + " : "
+                                + listDataChild.get(
+                                listDataHeader.get(groupPosition)).get(
+                                childPosition), Toast.LENGTH_SHORT)
+                        .show();
+                Thread thread = new Thread() {
                     @Override
                     public void run() {
                         super.run();
@@ -158,11 +152,16 @@ public class Fragments extends android.support.v4.app.Fragment {
                     }
                 };
                 thread.start();
-                Intent intent=new Intent(context,CompanyActivity.class);
-                context.startActivity(intent);*/
+                Intent intent = new Intent(context, CompanyActivity.class);
+                context.startActivity(intent);
+
+
                 return false;
             }
+
         });
+
+
     }
 
     //TODO INFO 단의 실제 데이터가 들어가는곳

@@ -18,21 +18,21 @@
         <activity
             android:name=".sharing.MainActivity"
             android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".company.CompanyActivity"></activity>
         <activity android:name=".List.ListActivity">
 
         </activity>
         <activity android:name=".profile.ProfileActivity" />
-        <activity android:name=".chat.ChatActivity"
-            android:windowSoftInputMode="adjustPan"
-            >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity
+            android:name=".chat.ChatActivity"
+            android:windowSoftInputMode="adjustPan">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

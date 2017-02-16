@@ -33,6 +33,8 @@ public class ListActivity extends AppCompatActivity {
         adapter = new ListFragmentAdapter(getSupportFragmentManager());
         Log.d(TAG, "페이져 생성" + viewPager);
         viewPager.setAdapter(adapter);
+
+
     }
 
     public void ChatActivityOnClick(View view) {

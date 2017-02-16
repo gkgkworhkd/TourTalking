@@ -8,18 +8,19 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.user.myapplication.List.ListActivity;
 import com.example.user.myapplication.R;
 import com.example.user.myapplication.List.ListFragmentAdapter;
 
 public class MainActivity extends AppCompatActivity {
-    String TAG;
-    Toolbar toolbar;
-    MyPagerAdapter myPagerAdapter;
-    ViewPager viewPager;
+    private String TAG;
+    private Toolbar toolbar;
+    private MyPagerAdapter myPagerAdapter;
+    public ViewPager viewPager;
     static public MainActivity mainActivity;
-    public ListFragmentAdapter adapter;
+    private BackPressCloseHandler backPressCloseHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(myPagerAdapter);
         //Log.d(TAG,listView_main+"이 생성되었다.");
         //SetUp ListView
+        backPressCloseHandler = new BackPressCloseHandler(this);
     }
 
     @Override
@@ -64,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
     public void MainBt(View view) {
         switch (view.getId()) {
             case R.id.talk_img:
-                Intent intent=new Intent(this, ListActivity.class);
+                Intent intent = new Intent(this, ListActivity.class);
                 startActivity(intent);
                 break;
             case R.id.trv_img:
@@ -78,5 +80,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
+    @Override
+    public void onBackPressed() {
+        backPressCloseHandler.onBackPressed();
+    }
 }
