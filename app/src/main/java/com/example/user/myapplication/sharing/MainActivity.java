@@ -8,11 +8,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.user.myapplication.List.ListActivity;
 import com.example.user.myapplication.R;
-import com.example.user.myapplication.List.ListFragmentAdapter;
+import com.example.user.myapplication.main.InitAsycnTask;
 
 public class MainActivity extends AppCompatActivity {
     private String TAG;
@@ -21,15 +20,18 @@ public class MainActivity extends AppCompatActivity {
     public ViewPager viewPager;
     static public MainActivity mainActivity;
     private BackPressCloseHandler backPressCloseHandler;
-
+    InitAsycnTask initAsycnTask;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         TAG = getClass().getSimpleName();
-        setContentView(R.layout.activity_main);
+            setContentView(R.layout.activity_main);
         mainActivity = this;
-        init();
+        initAsycnTask=new InitAsycnTask(MainActivity.mainActivity);
+        initAsycnTask.execute("http://192.168.219.100:7777/device/init","GET");
+        //startActivity(new Intent(L));
     }
+
 
     public void init() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -37,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
         viewPager = (ViewPager) findViewById(R.id.fragment_containar);
         myPagerAdapter = new MyPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(myPagerAdapter);
+
+
         //Log.d(TAG,listView_main+"이 생성되었다.");
         //SetUp ListView
         backPressCloseHandler = new BackPressCloseHandler(this);
@@ -72,8 +76,8 @@ public class MainActivity extends AppCompatActivity {
             case R.id.trv_img:
                 viewPager.setCurrentItem(1);
                 break;
-            case R.id.spe_img:
-                break;
+            /*case R.id.spe_img:
+                break;*/
             case R.id.home_toggle:
                 viewPager.setCurrentItem(0);
                 break;
@@ -83,5 +87,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         backPressCloseHandler.onBackPressed();
+    }
+
+    public MyPagerAdapter getMyPagerAdapter() {
+        return myPagerAdapter;
     }
 }

@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#433535"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,38 +15,45 @@
         android:layout_weight="1">
 
         <ImageView
+            android:src="@drawable/earth"
             android:id="@+id/trv_img"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@drawable/plane"
             android:onClick="MainBt"
-            />
+             />
 
         <ImageView
             android:id="@+id/talk_img"
-            android:onClick="MainBt"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="MainBt"
             android:src="@drawable/chat" />
 
         <ImageView
-            android:id="@+id/spe_img"
-            android:onClick="MainBt"
+            android:id="@+id/board"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@drawable/star" />
-
+            android:onClick="MainBt"
+            android:src="@drawable/plane" />
     </LinearLayout>
 
     <LinearLayout
-        android:layout_marginTop="60sp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="60sp"
         android:layout_weight="4"
         android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="회사공고"
+            android:id="@+id/textView" />
 
         <ListView
             android:id="@+id/announce"
@@ -52,18 +61,18 @@
             android:layout_height="0dp"
             android:layout_weight="1" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="특가상품" />
+
         <ListView
             android:id="@+id/trv_item"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1" />
-
-        <ListView
-            android:id="@+id/spe_item"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
+            android:layout_weight="3" />
     </LinearLayout>
 
 </LinearLayout>

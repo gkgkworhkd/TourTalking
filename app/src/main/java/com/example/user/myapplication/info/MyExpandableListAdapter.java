@@ -20,26 +20,33 @@ import java.util.List;
  * Created by user on 2017-02-13.
  */
 
-public class MyExpandableListAdapter extends BaseExpandableListAdapter{
+public class MyExpandableListAdapter extends BaseExpandableListAdapter {
     private Context _context;
     private List<String> _listDataHeader;
-    private HashMap<String,List<String>> _listDataChild;
+    private HashMap<String, List<String>> _listDataChild;
+    private HashMap<String, List<String[]>> _listDataChat;
     private ViewHolder viewHolder;
     private View _view;
     private String TAG;
 
     public MyExpandableListAdapter(Context context, List<String> listDataHeader,
-                                   HashMap<String, List<String>> listChildData,View view) {
-        TAG=this.getClass().getSimpleName();
+                                   HashMap<String, List<String>> listChildData,HashMap<String, List<String[]>> listDataChat,View view) {
+        TAG = this.getClass().getSimpleName();
         this._context = context;
         this._listDataHeader = listDataHeader;
         this._listDataChild = listChildData;
-        this._view=view;
+        this._view = view;
+        this._listDataChat=listDataChat;
     }
 
     //차일드 뷰 반환
     @Override
     public Object getChild(int groupPosition, int childPosititon) {
+        return this._listDataChild.get(this._listDataHeader.get(groupPosition))
+                .get(childPosititon);
+    }
+
+    public Object getChildName(int groupPosition, int childPosititon) {
         return this._listDataChild.get(this._listDataHeader.get(groupPosition))
                 .get(childPosititon);
     }
@@ -56,7 +63,7 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter{
                              boolean isLastChild, View convertView, ViewGroup parent) {
 
         final String childText = (String) getChild(groupPosition, childPosition);
-
+        final String[] chatNames = (String[]) getChildName(groupPosition, childPosition);
         if (convertView == null) {
 
             LayoutInflater infalInflater = (LayoutInflater) this._context
@@ -64,11 +71,17 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter{
             convertView = infalInflater.inflate(R.layout.info_list_item, null);
         }
 
-        TextView txtListChild = (TextView) convertView
-                .findViewById(R.id.libListItem);
+        TextView txtListChild = (TextView) convertView.findViewById(R.id.libListItem);
+        TextView chat_name = (TextView) convertView.findViewById(R.id.country_chat_name);
+        TextView country_img = (TextView) convertView.findViewById(R.id.country_img);
 
-        txtListChild.setText(childText);
+        chat_name.setText(childText);
+        chat_name.append(" 단체 채팅방");
 
+        country_img.setText(childText);
+        for(int i=0;i<chatNames.length;i++){
+            txtListChild.append(chatNames[i]);
+        }
         return convertView;
     }
 
@@ -109,14 +122,13 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter{
             convertView = infalInflater.inflate(R.layout.info_list_group, null);
             viewHolder.iv_image = (ImageView) convertView.findViewById(R.id.iv_image);
             convertView.setTag(viewHolder);
-        }
-        else{
-            viewHolder = (ViewHolder)convertView.getTag();
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
         }
         //그룹을 펼칠 때 또는 닫을 때 아이콘 변경
-        if(isExpanded){
+        if (isExpanded) {
             viewHolder.iv_image.setBackgroundColor(Color.GREEN);
-        }else{
+        } else {
             viewHolder.iv_image.setBackgroundColor(Color.WHITE);
         }
 

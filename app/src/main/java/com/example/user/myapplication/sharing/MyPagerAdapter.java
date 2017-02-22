@@ -13,7 +13,7 @@ import com.example.user.myapplication.R;
 
 public class MyPagerAdapter extends FragmentStatePagerAdapter {
     Fragments fragment_main, fragment_info;
-    Fragments[] myFragment = {fragment_main, fragment_info};
+    public Fragments[] myFragment = {fragment_main, fragment_info};
     public static int[] FRGID = {R.layout.main_fragment, R.layout.info_fragment};
 
     public MyPagerAdapter(FragmentManager manager) {

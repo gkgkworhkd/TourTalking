@@ -12,12 +12,12 @@
         android:layout_height="match_parent"
         android:layout_weight="0.4">
 
-        <ImageView
-            android:id="@+id/expand_flag"
+        <TextView
+            android:id="@+id/country_img"
+            android:text="중국"
+            android:gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-
-            android:src="@drawable/china" />
+            android:layout_height="80dp" />
 
     </LinearLayout>
 
@@ -28,9 +28,9 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/con_name"
+            android:id="@+id/country_chat_name"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/back"
             android:gravity="center_vertical"
@@ -39,7 +39,7 @@
         <TextView
             android:id="@+id/libListItem"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="2"
             android:background="@drawable/back"
             android:gravity="center_vertical"
