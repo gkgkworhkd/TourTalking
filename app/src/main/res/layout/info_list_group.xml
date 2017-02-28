@@ -2,21 +2,32 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#292d38"
     android:orientation="horizontal"
-    android:padding="8dp"
-    android:background="#fffeeb">
-    <TextView
-        android:layout_weight="9"
-        android:id="@+id/lblListHeader"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
-        android:textColor="#919191"
-        android:textSize="17dp" />
-    <ImageView
-        android:layout_weight="1"
-        android:id="@+id/iv_image"
-        android:layout_width="0dp"
-        android:layout_height="30dip" />
+    android:padding="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_gravity="center_vertical"
+            android:id="@+id/lblListHeader"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="9"
+            android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
+            android:textColor="#919191"
+            android:textSize="17dp" />
+
+        <ImageView
+            android:layout_gravity="center_vertical"
+            android:id="@+id/iv_image"
+            android:layout_width="0dp"
+            android:layout_height="30dip"
+            android:layout_weight="1" />
+    </LinearLayout>
+
 
 </LinearLayout>

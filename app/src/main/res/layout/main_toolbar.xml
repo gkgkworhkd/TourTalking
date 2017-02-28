@@ -4,7 +4,7 @@
     android:layout_height="?attr/actionBarSize"
     android:layout_alignParentTop="true"
     android:layout_centerHorizontal="true"
-    android:background="#fffef4">
+    android:background="#191d25">
 
     <LinearLayout
         android:orientation="horizontal"
@@ -28,12 +28,14 @@
             android:layout_height="40sp" />
 
         <TextView
+            android:textColor="#ddffffff"
+            android:textStyle="bold"
             android:layout_marginLeft="50sp"
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
-            android:text="TOURTALK"
+            android:text="TOUR TALKING"
             android:textSize="@dimen/activity_horizontal_margin" />
 
     </LinearLayout>

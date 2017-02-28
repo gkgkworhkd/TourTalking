@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#433535"
+    android:background="#191d25"
     >
 
     <LinearLayout
@@ -12,7 +12,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:layout_marginTop="15dp"
-        android:layout_weight="1">
+        android:layout_weight="0.8">
 
         <ImageView
             android:src="@drawable/earth"
@@ -29,7 +29,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="MainBt"
-            android:src="@drawable/chat" />
+            android:src="@drawable/chat"
+            />
 
         <ImageView
             android:id="@+id/board"
@@ -37,20 +38,22 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="MainBt"
-            android:src="@drawable/plane" />
+            android:src="@drawable/bag" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="60sp"
+        android:layout_marginTop="20dp"
         android:layout_weight="4"
         android:orientation="vertical">
 
         <TextView
+            android:textStyle="bold"
+            android:textColor="#6b7281"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="0.4"
             android:gravity="center"
             android:text="회사공고"
             android:id="@+id/textView" />
@@ -59,12 +62,15 @@
             android:id="@+id/announce"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1" />
+            android:layout_weight="1.3" />
 
         <TextView
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"
+            android:textColor="#6b7281"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="0.4"
             android:gravity="center"
             android:text="특가상품" />
 

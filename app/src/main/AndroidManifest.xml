@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.user.myapplication">
-
+    package="com.example.user.TourTalking">
     <uses-permission android:name="android.permission.INTERNET" />
-
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -16,23 +13,24 @@
             android:windowSoftInputMode="adjustPan"
         -->
         <activity
-            android:name=".sharing.MainActivity"
+            android:name="com.example.user.TourTalking.sharing.MainActivity"
+            android:windowSoftInputMode="adjustPan"
+            >
+
+        </activity>
+        <activity android:name="com.example.user.TourTalking.company.CompanyActivity"></activity>
+        <activity android:name="com.example.user.TourTalking.List.ListActivity">
+        </activity>
+        <activity android:name="com.example.user.TourTalking.profile.ProfileActivity" />
+        <activity
+            android:name="com.example.user.TourTalking.chat.ChatActivity"
             android:windowSoftInputMode="adjustPan">
+        </activity>
+        <activity android:name=".board.BoardActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".company.CompanyActivity"></activity>
-        <activity android:name=".List.ListActivity">
-
-        </activity>
-        <activity android:name=".profile.ProfileActivity" />
-        <activity
-            android:name=".chat.ChatActivity"
-            android:windowSoftInputMode="adjustPan">
-
         </activity>
     </application>
 
