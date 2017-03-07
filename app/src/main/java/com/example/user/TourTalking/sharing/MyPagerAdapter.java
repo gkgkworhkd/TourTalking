@@ -14,7 +14,7 @@ import com.example.user.TourTalking.R;
 public class MyPagerAdapter extends FragmentStatePagerAdapter {
     Fragments fragment_main, fragment_info;
     public Fragments[] myFragment = {fragment_main, fragment_info};
-    public static int[] FRGID = {R.layout.main_fragment, R.layout.info_fragment};
+    public static int[] FRGID = {R.layout.main_fragment, R.layout.country_list_fragment};
 
     public MyPagerAdapter(FragmentManager manager) {
         super(manager);

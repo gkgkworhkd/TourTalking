@@ -9,7 +9,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:id="@+id/log_company" />
+        android:id="@+id/image_company" />
 
     <LinearLayout
         android:id="@+id/item_company"

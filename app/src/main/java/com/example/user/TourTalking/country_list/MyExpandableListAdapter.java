@@ -1,17 +1,20 @@
-package com.example.user.TourTalking.info;
+package com.example.user.TourTalking.country_list;
 
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.user.TourTalking.R;
+import com.example.user.TourTalking.domain.company.Company;
 
 import java.util.HashMap;
 import java.util.List;
@@ -30,14 +33,14 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
     private View _view;
     private String TAG;
 
-    public MyExpandableListAdapter(Context context, List<String> listDataHeader, HashMap<String, List<String>> listChildData, HashMap<String, List<String>> listDataChat, View view,HashMap<String, List<String[]>> listDataChatHeder) {
+    public MyExpandableListAdapter(Context context, List<String> listDataHeader, HashMap<String, List<String>> listChildData, HashMap<String, List<String>> listDataChat, View view, HashMap<String, List<String[]>> listDataChatHeder) {
         TAG = this.getClass().getSimpleName();
         this._context = context;
         this._listDataHeader = listDataHeader;
         this._listDataChild = listChildData;
         this._view = view;
         this._listDataChat = listDataChat;
-        this._listDataChatHeder=listDataChatHeder;
+        this._listDataChatHeder = listDataChatHeder;
     }
 
     //차일드 뷰 반환
@@ -47,6 +50,7 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
         return this._listDataChild.get(this._listDataHeader.get(groupPosition))
                 .get(childPosititon);
     }
+
     public Object getCityChild(int groupPosition, int childPosititon) {
         return this._listDataChatHeder.get(this._listDataHeader.get(groupPosition))
                 .get(childPosititon);
@@ -68,43 +72,50 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
                              boolean isLastChild, View convertView, ViewGroup parent) {
 
         final String childText = (String) getChild(groupPosition, childPosition);
-        final String[] cityTexts=(String[])getCityChild(groupPosition, childPosition);
+        final String[] cityTexts = (String[]) getCityChild(groupPosition, childPosition);
         //final List childCityText = myGetChild(groupPosition);
         if (convertView == null) {
 
             LayoutInflater infalInflater = (LayoutInflater) this._context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = infalInflater.inflate(R.layout.info_list_item, null);
+            convertView = infalInflater.inflate(R.layout.country_list_list_item, null);
         }
 
-        TextView txtListChild = (TextView) convertView.findViewById(R.id.libListItem);
+        LinearLayout linearLayout = (LinearLayout) convertView.findViewById(R.id.libListItem);
         TextView chat_name = (TextView) convertView.findViewById(R.id.country_chat_name);
         TextView country_img = (TextView) convertView.findViewById(R.id.country_img);
-
-        txtListChild.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(_context,childText+"눌럿다",Toast.LENGTH_SHORT).show();
-            }
-        });
-
         chat_name.setText(childText);
-
         chat_name.append(" 단체 채팅방");
-
         country_img.setText(childText);
-        //String[] cityName = (String[]) childText[1]);
-    if(cityTexts.length!=0){
-        txtListChild.setText("");
-        for (int i = 0; i < cityTexts.length; i++) {
-            txtListChild.append(cityTexts[i]);
-            txtListChild.append(" ");
+        //String[] cityName = (String[]) childText[1]);\
+        linearLayout.removeAllViews();
+        if (cityTexts.length != 0) {
+            for (int i = 0; i < cityTexts.length; i++) {
+                final String cityName = cityTexts[i];
+                linearLayout.addView(getCityListLayout(cityName));
+            }
+        } else {
+            //txtListChild.setText(childText);
+            linearLayout.addView(getCityListLayout(childText));
+            Log.d(TAG,childText+"얘다");
         }
-    }else {
-        txtListChild.setText(childText);
+        return convertView;
     }
 
-        return convertView;
+    public CityListLayout getCityListLayout(final String text) {
+        CityListLayout listLayout = new CityListLayout(_context);
+        listLayout.textView.setText(text);
+        listLayout.setLayoutParams(new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT,1));
+        listLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(_context,text+" 를 눌럿다",Toast.LENGTH_SHORT).show();
+                CompanyLsitAsycnTask companyLsitAsycnTask=new CompanyLsitAsycnTask(_context);
+                companyLsitAsycnTask.execute("http://192.168.219.100:7777/device/compList?city_name=","GET",text);
+
+            }
+        });
+        return listLayout;
     }
 
     //차일드 뷰의 사이즈 반환
@@ -141,7 +152,7 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
             viewHolder = new ViewHolder();
             LayoutInflater infalInflater = (LayoutInflater) this._context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = infalInflater.inflate(R.layout.info_list_group, null);
+            convertView = infalInflater.inflate(R.layout.country_list_list_group, null);
             viewHolder.iv_image = (ImageView) convertView.findViewById(R.id.iv_image);
             convertView.setTag(viewHolder);
         } else {

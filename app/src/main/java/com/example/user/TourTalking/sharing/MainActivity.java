@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.main_activity);
 
         initAsycnTask = new InitAsycnTask(MainActivity.mainActivity);
-        initAsycnTask.execute("http://192.168.219.101:7777/device/init", "GET");
+        initAsycnTask.execute("http://192.168.219.100:7777/device/init", "GET");
 
     }
 

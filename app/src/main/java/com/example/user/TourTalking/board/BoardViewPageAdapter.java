@@ -9,20 +9,20 @@ import android.support.v4.app.FragmentStatePagerAdapter;
  */
 
 public class BoardViewPageAdapter extends FragmentStatePagerAdapter{
-
-
+    BoardFragment fragment;
     public BoardViewPageAdapter(FragmentManager fm) {
         super(fm);
+        fragment=new BoardFragment();
     }
 
     @Override
     public int getCount() {
-        return 0;
+        return 1;
     }
 
     @Override
     public Fragment getItem(int position) {
-        return null;
+        return fragment;
     }
 
 }

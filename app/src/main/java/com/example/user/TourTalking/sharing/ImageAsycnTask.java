@@ -3,9 +3,8 @@ package com.example.user.TourTalking.sharing;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
-import android.view.View;
+import android.widget.ImageView;
 
-import com.example.user.TourTalking.main.Notice;
 import com.example.user.TourTalking.main.NoticeItem;
 
 import java.io.InputStream;
@@ -18,8 +17,13 @@ import java.net.URL;
 
 public class ImageAsycnTask extends AsyncTask<String, Void, Bitmap> {
     NoticeItem item;
+    ImageView imageView;
     public ImageAsycnTask(NoticeItem item) {
         this.item = item;
+    }
+    public ImageAsycnTask(ImageView imageView) {
+        this.imageView=imageView;
+
     }
 
     @Override
@@ -34,8 +38,8 @@ public class ImageAsycnTask extends AsyncTask<String, Void, Bitmap> {
 
     @Override
     protected void onPostExecute(Bitmap s) {
-        item.itemImage.setImageBitmap(resizeBitmap(s));
-
+        if(item!=null)item.itemImage.setImageBitmap(resizeBitmap(s,item.getWidth()));
+        else if(imageView!=null)imageView.setImageBitmap(resizeBitmap(s,imageView.getWidth()));
     }
 
     @Override
@@ -44,9 +48,9 @@ public class ImageAsycnTask extends AsyncTask<String, Void, Bitmap> {
     }
 
 
-    public Bitmap resizeBitmap(Bitmap original) {
+    public Bitmap resizeBitmap(Bitmap original,int size) {
 
-        int resizeWidth = 500;
+        int resizeWidth = size;
 
         double aspectRatio = (double) original.getHeight() / (double) original.getWidth();
         int targetHeight = (int) (resizeWidth * aspectRatio);
@@ -57,14 +61,11 @@ public class ImageAsycnTask extends AsyncTask<String, Void, Bitmap> {
         return result;
     }
 
-
     private Bitmap getBitmap(String url) {
         URL imgUrl = null;
         HttpURLConnection connection = null;
         InputStream is = null;
-
         Bitmap retBitmap = null;
-
         try {
             imgUrl = new URL(url);
             connection = (HttpURLConnection) imgUrl.openConnection();

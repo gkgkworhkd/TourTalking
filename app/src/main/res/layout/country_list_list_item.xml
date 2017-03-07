@@ -4,9 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     >
-
     <LinearLayout
-
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="0.4">
@@ -36,14 +34,17 @@
             android:gravity="center_vertical"
             android:text="중국 단체 채팅방" />
 
-        <TextView
-            android:textColor="#919191"
+        <LinearLayout
+            android:orientation="horizontal"
             android:id="@+id/libListItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:gravity="center_vertical"
-            android:text="여기에 공지가 들어갑니다" />
+             >
+
+
+        </LinearLayout>
 
     </LinearLayout>
 

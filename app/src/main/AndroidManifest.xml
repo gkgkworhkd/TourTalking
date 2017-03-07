@@ -16,7 +16,10 @@
             android:name="com.example.user.TourTalking.sharing.MainActivity"
             android:windowSoftInputMode="adjustPan"
             >
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name="com.example.user.TourTalking.company.CompanyActivity"></activity>
         <activity android:name="com.example.user.TourTalking.List.ListActivity">
@@ -27,10 +30,7 @@
             android:windowSoftInputMode="adjustPan">
         </activity>
         <activity android:name=".board.BoardActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
     </application>
 

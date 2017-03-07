@@ -8,6 +8,7 @@ import com.example.user.TourTalking.domain.mian.CompanyBoard;
 import com.example.user.TourTalking.domain.mian.Continent;
 import com.example.user.TourTalking.domain.mian.Country;
 import com.example.user.TourTalking.domain.mian.TrvBoard;
+import com.example.user.TourTalking.domain.mian.TrvBoardContent;
 import com.example.user.TourTalking.domain.mian.TrvImageUrl;
 import com.example.user.TourTalking.sharing.MainActivity;
 
@@ -111,7 +112,6 @@ public class InitAsycnTask extends AsyncTask<String, Void, String> {
                         //Log.d(TAG,obj.getString("data")+"는?");
                         // Log.d(TAG,"실행이된다");
                         JSONArray dataArray = new JSONArray(obj.getString("data"));
-                        Log.d(TAG, "실행이안된다");
 
                         list = new ArrayList<CompanyBoard>();
                         for (int a = 0; a < dataArray.length(); a++) {
@@ -144,11 +144,15 @@ public class InitAsycnTask extends AsyncTask<String, Void, String> {
                             dto.setCity_name(data.getString("company_name"));
                             dto.setCompany_name(data.getString("city_name"));
                             dto.setTrv_board_title(data.getString("trv_board_title"));
-                            dto.setTrv_board_content(data.getString("trv_board_content"));
+                           // dto.setTrv_board_content(data.getString("trv_board_content"));
                             dto.setTrv_board_hit(data.getInt("trv_board_hit"));
                             dto.setTrv_board_regdate(data.getString("trv_board_regdate"));
                             dto.setTrvImageUrl(getTrvBoarImage(data.getString("trvImageUrl")));
                             Log.d(TAG,data.getString("trvImageUrl"));
+
+
+                            if(!data.getString("trvBoardContent").equals("[]"))dto.setTrvBoardContent(getTrvBoardContent(data.getString("trvBoardContent")));
+
                             list.add(dto);
                         }
                         annList.put("trevelItem", list);
@@ -244,6 +248,24 @@ public class InitAsycnTask extends AsyncTask<String, Void, String> {
         }
 
         return trvImageUrls;
+    }
+    private List<TrvBoardContent> getTrvBoardContent(String json) {
+        List<TrvBoardContent> trvBoardContents = new ArrayList<TrvBoardContent>();
+            try {
+                JSONArray array = new JSONArray(json);
+                for (int i = 0; i < array.length(); i++) {
+                    TrvBoardContent trvBoardContent = new TrvBoardContent();
+                    JSONObject obj = (JSONObject) array.get(i);
+                    Log.d(TAG,"받아온 아이디는 : "+obj.getInt("trv_board_id"));
+                    trvBoardContent.setTrv_board_id(obj.getInt("trv_board_id"));
+                    trvBoardContent.setBoard_content(obj.getString("board_content"));
+                    trvBoardContent.setBoard_content_id(obj.getInt("board_content_id"));
+                    trvBoardContents.add(trvBoardContent);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        return trvBoardContents;
     }
 
 

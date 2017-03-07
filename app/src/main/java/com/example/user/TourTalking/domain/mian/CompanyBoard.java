@@ -1,10 +1,13 @@
 package com.example.user.TourTalking.domain.mian;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by user on 2017-02-16.
  */
 
-public class CompanyBoard extends Announce{
+public class CompanyBoard implements Parcelable{
     private int company_board_id;
     private String company_board_title;
     private String company_board_content;
@@ -68,4 +71,49 @@ public class CompanyBoard extends Announce{
     public void setImage_url(String image_url) {
         this.image_url = image_url;
     }
+
+    public static Creator<CompanyBoard> getCREATOR() {
+        return CREATOR;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.company_board_id);
+        dest.writeString(this.company_board_title);
+        dest.writeString(this.company_board_content);
+        dest.writeString(this.company_board_regdate);
+        dest.writeInt(this.company_board_hit);
+        dest.writeString(this.company_name);
+        dest.writeString(this.image_url);
+    }
+
+    public CompanyBoard() {
+    }
+
+    protected CompanyBoard(Parcel in) {
+        this.company_board_id = in.readInt();
+        this.company_board_title = in.readString();
+        this.company_board_content = in.readString();
+        this.company_board_regdate = in.readString();
+        this.company_board_hit = in.readInt();
+        this.company_name = in.readString();
+        this.image_url = in.readString();
+    }
+
+    public static final Creator<CompanyBoard> CREATOR = new Creator<CompanyBoard>() {
+        @Override
+        public CompanyBoard createFromParcel(Parcel source) {
+            return new CompanyBoard(source);
+        }
+
+        @Override
+        public CompanyBoard[] newArray(int size) {
+            return new CompanyBoard[size];
+        }
+    };
 }

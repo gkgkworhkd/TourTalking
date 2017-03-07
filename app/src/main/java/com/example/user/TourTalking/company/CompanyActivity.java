@@ -19,29 +19,19 @@ import com.example.user.TourTalking.profile.ProfileActivity;
 public class CompanyActivity extends AppCompatActivity {
     ListView companyListView;
     CompanyActivity companyActivity;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.company_activity);
-        Conpany();
+        Init();
         companyActivity = this;
 
     }
 
-    public void Conpany() {
+    public void Init() {
         companyListView = (ListView) findViewById(R.id.company);
         CompanyListAdapter adapter = new CompanyListAdapter(this);
         companyListView.setAdapter(adapter);
-        companyListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                TextView textView = (TextView) view.findViewById(R.id.name_company);
-                //Toast.makeText(getApplicationContext(),position+"번쨰"+textView.getText()+"이선택됨",Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
-                companyActivity.startActivity(intent);
-            }
-        });
     }
 
     public void MainBt(View view) {

@@ -11,12 +11,16 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:background="@drawable/background"
+
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="top"
             android:layout_weight="1">
-
+        <ImageView
+            android:id="@+id/profile_image"
+            android:background="@drawable/background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
         </LinearLayout>
         <LinearLayout

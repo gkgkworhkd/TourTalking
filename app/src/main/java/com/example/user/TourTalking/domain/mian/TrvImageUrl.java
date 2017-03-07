@@ -1,6 +1,9 @@
 package com.example.user.TourTalking.domain.mian;
 
-public class TrvImageUrl {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class TrvImageUrl implements Parcelable {
 	private  int trv_image_id;
 	private String image_url;
 	
@@ -16,5 +19,35 @@ public class TrvImageUrl {
 	public void setImage_url(String image_url) {
 		this.image_url = image_url;
 	}
-	
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeInt(this.trv_image_id);
+		dest.writeString(this.image_url);
+	}
+
+	public TrvImageUrl() {
+	}
+
+	protected TrvImageUrl(Parcel in) {
+		this.trv_image_id = in.readInt();
+		this.image_url = in.readString();
+	}
+
+	public static final Creator<TrvImageUrl> CREATOR = new Creator<TrvImageUrl>() {
+		@Override
+		public TrvImageUrl createFromParcel(Parcel source) {
+			return new TrvImageUrl(source);
+		}
+
+		@Override
+		public TrvImageUrl[] newArray(int size) {
+			return new TrvImageUrl[size];
+		}
+	};
 }

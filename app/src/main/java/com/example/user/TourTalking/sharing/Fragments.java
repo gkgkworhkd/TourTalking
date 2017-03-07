@@ -1,6 +1,5 @@
 package com.example.user.TourTalking.sharing;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.annotation.Nullable;
@@ -13,11 +12,10 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.user.TourTalking.R;
-import com.example.user.TourTalking.company.CompanyActivity;
 import com.example.user.TourTalking.domain.mian.City;
 import com.example.user.TourTalking.domain.mian.Continent;
 import com.example.user.TourTalking.domain.mian.Country;
-import com.example.user.TourTalking.info.MyExpandableListAdapter;
+import com.example.user.TourTalking.country_list.MyExpandableListAdapter;
 import com.example.user.TourTalking.main.ListViewAdapter;
 
 import java.util.ArrayList;
@@ -78,7 +76,7 @@ public class Fragments extends android.support.v4.app.Fragment {
             //context.initAsycnTask.getAnnList();
             mainInit(view);
             initData = null;
-        } else if (id == R.layout.info_fragment) {
+        } else if (id == R.layout.country_list_fragment) {
             initData.add(context.initAsycnTask.getConutryList());
 
             SetData();
@@ -169,8 +167,7 @@ public class Fragments extends android.support.v4.app.Fragment {
                     }
                 };
                 thread.start();
-                Intent intent = new Intent(context, CompanyActivity.class);
-                context.startActivity(intent);
+
 
 
                 return false;

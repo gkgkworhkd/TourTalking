@@ -1,6 +1,9 @@
 package com.example.user.TourTalking.domain.mian;
 
-public class City {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class City implements Parcelable {
     private int city_id;
     private String country_name;
     private String city_name;
@@ -30,4 +33,36 @@ public class City {
     }
 
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.city_id);
+        dest.writeString(this.country_name);
+        dest.writeString(this.city_name);
+    }
+
+    public City() {
+    }
+
+    protected City(Parcel in) {
+        this.city_id = in.readInt();
+        this.country_name = in.readString();
+        this.city_name = in.readString();
+    }
+
+    public static final Creator<City> CREATOR = new Creator<City>() {
+        @Override
+        public City createFromParcel(Parcel source) {
+            return new City(source);
+        }
+
+        @Override
+        public City[] newArray(int size) {
+            return new City[size];
+        }
+    };
 }
