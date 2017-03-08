@@ -85,7 +85,6 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
         TextView chat_name = (TextView) convertView.findViewById(R.id.country_chat_name);
         TextView country_img = (TextView) convertView.findViewById(R.id.country_img);
         chat_name.setText(childText);
-        chat_name.append(" 단체 채팅방");
         country_img.setText(childText);
         //String[] cityName = (String[]) childText[1]);\
         linearLayout.removeAllViews();
@@ -97,7 +96,6 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
         } else {
             //txtListChild.setText(childText);
             linearLayout.addView(getCityListLayout(childText));
-            Log.d(TAG,childText+"얘다");
         }
         return convertView;
     }
