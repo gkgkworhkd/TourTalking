@@ -5,22 +5,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import java.util.ArrayList;
+
 /**
  * Created by user on 2017-02-16.
  */
 
 public class ChatAdapter extends BaseAdapter {
     Context context;
-    int[] chatSize;
+    ArrayList chatSize;
     int sum;
-    public ChatAdapter(Context context,int[] chatSize) {
+    public ChatAdapter(Context context, ArrayList chatSize) {
         this.context = context;
         this.chatSize=chatSize;
     }
 
     @Override
     public int getCount() {
-        return chatSize.length;
+        return chatSize.size();
     }
 
     @Override
@@ -35,15 +37,16 @@ public class ChatAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View view = null;
-        if (chatSize[sum] == ChatActivity.REVMESSAGE) {
+        View view = (View) chatSize.get(position);
+
+        /*if (chatSize[sum] == ChatActivity.REVMESSAGE) {
             String[] recvMsg=new String[2];
             view=new ReceiveMessage(context,recvMsg);
         } else if (chatSize[sum]== ChatActivity.SENDMESSAGE) {
             String sendMsg="보낼 메세지";
             view=new SendMessage(context,sendMsg);
         }
-        if(sum<chatSize.length)sum++;
+        if(sum<chatSize.length)sum++;*/
         return view;
     }
 }

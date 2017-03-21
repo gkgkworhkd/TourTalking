@@ -2,67 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#eaeaea"
     android:orientation="vertical">
-    <LinearLayout
-        android:layout_weight="0.8"
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="vertical">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1">
-
-                <TextView
-                    android:textSize="15dp"
-                    android:textStyle="bold"
-                    android:textColor="#4d545c"
-                    android:id="@+id/board_company_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:text="companyName : " />
-
-                <TextView
-                    android:textSize="15dp"
-                    android:textStyle="bold"
-                    android:textColor="#4d545c"
-                    android:id="@+id/board_city_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:text="city_name : " />
-                <TextView
-                    android:textSize="15dp"
-                    android:textStyle="bold"
-                    android:textColor="#4d545c"
-                    android:id="@+id/board_title"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:text="companyName : " />
-
-                <TextView
-                    android:textSize="15dp"
-                    android:textStyle="bold"
-                    android:textColor="#4d545c"
-                    android:id="@+id/board_plane"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:text="companyName : " />
-            </LinearLayout>
-        </LinearLayout>
-
-    </LinearLayout>
     <ScrollView
         android:layout_weight="3"
         android:layout_width="match_parent"
@@ -73,11 +14,62 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/board_image_container"
+            android:layout_margin="10dp"
             >
+            <android.support.v4.view.ViewPager
+                android:id="@+id/board_viewPager"
+                android:layout_weight="3"
+                android:layout_width="match_parent"
+                android:layout_height="300dp">
+            </android.support.v4.view.ViewPager>
             <TextView
                 android:id="@+id/board_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
     </ScrollView>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <TextView
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:textColor="#4d545c"
+            android:id="@+id/board_company_name"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="companyName : " />
+
+        <TextView
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:textColor="#4d545c"
+            android:id="@+id/board_city_name"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="city_name : " />
+        <TextView
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:textColor="#4d545c"
+            android:id="@+id/board_title"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="companyName : " />
+
+        <TextView
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:textColor="#4d545c"
+            android:id="@+id/board_plane"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="companyName : " />
+    </LinearLayout>
 </LinearLayout>

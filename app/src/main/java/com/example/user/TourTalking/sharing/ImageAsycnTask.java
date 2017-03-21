@@ -18,11 +18,19 @@ import java.net.URL;
 public class ImageAsycnTask extends AsyncTask<String, Void, Bitmap> {
     NoticeItem item;
     ImageView imageView;
+    int userSize=0;
+
     public ImageAsycnTask(NoticeItem item) {
         this.item = item;
     }
+
     public ImageAsycnTask(ImageView imageView) {
-        this.imageView=imageView;
+        this.imageView = imageView;
+
+    }
+    public ImageAsycnTask(ImageView imageView,int userSize) {
+        this.userSize=userSize;
+        this.imageView = imageView;
 
     }
 
@@ -38,8 +46,15 @@ public class ImageAsycnTask extends AsyncTask<String, Void, Bitmap> {
 
     @Override
     protected void onPostExecute(Bitmap s) {
-        if(item!=null)item.itemImage.setImageBitmap(resizeBitmap(s,item.getWidth()));
-        else if(imageView!=null)imageView.setImageBitmap(resizeBitmap(s,imageView.getWidth()));
+        if (item != null) item.itemImage.setImageBitmap(resizeBitmap(s, item.getWidth()));
+        else if (imageView != null) {
+            if(userSize==0){
+                imageView.setImageBitmap(resizeBitmap(s, imageView.getWidth()));
+            }else {
+                imageView.setImageBitmap(resizeBitmap(s, userSize));
+            }
+        }
+
     }
 
     @Override
@@ -48,10 +63,10 @@ public class ImageAsycnTask extends AsyncTask<String, Void, Bitmap> {
     }
 
 
-    public Bitmap resizeBitmap(Bitmap original,int size) {
+    public Bitmap resizeBitmap(Bitmap original, int size) {
 
         int resizeWidth = size;
-
+        if(resizeWidth==0)resizeWidth=50;
         double aspectRatio = (double) original.getHeight() / (double) original.getWidth();
         int targetHeight = (int) (resizeWidth * aspectRatio);
         Bitmap result = Bitmap.createScaledBitmap(original, resizeWidth, targetHeight, false);

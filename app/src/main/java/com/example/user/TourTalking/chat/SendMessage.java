@@ -21,7 +21,7 @@ public class SendMessage extends LinearLayout{
         this.msg=msg;
         inflater=(LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         view=inflater.inflate(R.layout.chat_item_send,this);
-        //setData();
+        setData();
     }
     public void setData(){
         TextView message=(TextView) view.findViewById(R.id.send_Message);

@@ -8,19 +8,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.user.TourTalking.R;
-import com.example.user.TourTalking.domain.company.Company;
+import com.example.user.TourTalking.domain.Company;
 import com.example.user.TourTalking.sharing.ImageAsycnTask;
-
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
 
 /**
  * Created by user on 2017-02-14.
  */
 
 public class CompanyItem extends LinearLayout {
-    Company dto;
+    private Company dto;
     View view;
     public CompanyItem(Context context,Company dto) {
         super(context);
@@ -36,7 +32,15 @@ public class CompanyItem extends LinearLayout {
         ImageView compImage=(ImageView)view.findViewById(R.id.image_company);
         compIntro.setText(dto.getCompany_intro());
         compName.setText(dto.getCompany_name());
-        ImageAsycnTask imageAsycnTask=new ImageAsycnTask(compImage);
+        ImageAsycnTask imageAsycnTask=new ImageAsycnTask(compImage,270);
         imageAsycnTask.execute(dto.getImage_url(),"GET");
+    }
+
+    public Company getDto() {
+        return dto;
+    }
+
+    public void setDto(Company dto) {
+        this.dto = dto;
     }
 }

@@ -3,37 +3,56 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:background="#292d38"
+    android:background="#eaeaea"
     >
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal">
-        <ImageView
-            android:src="@drawable/default_item"
-            android:id="@+id/company_img"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:text="업체 명"
-            android:textColor="#919191"
-            android:layout_marginRight="5sp"
-            />
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded"
+        >
+        <LinearLayout
+            android:layout_margin="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:orientation="horizontal"
+            android:background="#FFFF"
+            >
+            <ImageView
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/default_item"
+                android:id="@+id/company_img"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_marginLeft="20dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:text="업체 명"
+                    android:textColor="#686868"
+                    android:textStyle="bold"
+                    android:layout_marginRight="5sp"
+                    />
 
-        <TextView
-            android:id="@+id/content"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="3"
-            android:gravity="center_vertical"
-            android:text="여기에 공지가 들어갑니다"
-            android:textColor="#919191" />
+                <TextView
+                    android:id="@+id/content"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="3"
+                    android:text="여기에 공지가 들어갑니다"
+                    android:textColor="#919191" />
+            </LinearLayout>
+
+        </LinearLayout>
     </LinearLayout>
+
 
 </LinearLayout>

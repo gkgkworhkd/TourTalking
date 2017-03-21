@@ -13,8 +13,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.user.TourTalking.R;
-import com.example.user.TourTalking.domain.mian.CompanyBoard;
-import com.example.user.TourTalking.domain.mian.TrvBoard;
+import com.example.user.TourTalking.domain.CompanyBoard;
+import com.example.user.TourTalking.domain.TrvBoard;
 import com.example.user.TourTalking.main.NoticeItem;
 import com.example.user.TourTalking.sharing.ImageAsycnTask;
 

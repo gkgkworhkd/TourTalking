@@ -1,4 +1,4 @@
-package com.example.user.TourTalking.domain.chat;
+package com.example.user.TourTalking.domain;
 
 /**
  * Created by user on 2017-02-16.

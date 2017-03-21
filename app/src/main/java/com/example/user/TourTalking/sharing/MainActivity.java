@@ -2,6 +2,7 @@ package com.example.user.TourTalking.sharing;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -11,7 +12,7 @@ import android.view.View;
 
 import com.example.user.TourTalking.List.ListActivity;
 import com.example.user.TourTalking.R;
-import com.example.user.TourTalking.main.InitAsycnTask;
+import com.example.user.TourTalking.board.BoardListActivity;
 
 public class MainActivity extends AppCompatActivity {
     private String TAG;
@@ -20,15 +21,21 @@ public class MainActivity extends AppCompatActivity {
     public ViewPager viewPager;
     static public MainActivity mainActivity;
     private BackPressCloseHandler backPressCloseHandler;
-    InitAsycnTask initAsycnTask;
+    public InitAsycnTask initAsycnTask;
+    boolean isRunIntro=true;
+    //TODO 임시 MEMBERTYPE&PK
+    String memberType="coustomer";
+    int member_pk=1;
+    Bundle savedInstanceState;
+    public String[] memberInfo={memberType,Integer.toString(member_pk)};
 
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.savedInstanceState=savedInstanceState;
         TAG = getClass().getSimpleName();
         mainActivity = this;
         setContentView(R.layout.intro_activity);
-        boolean isRunIntro = getIntent().getBooleanExtra("intro", true);
+        isRunIntro = getIntent().getBooleanExtra("intro", true);
         if (isRunIntro) {
             beforeIntro();
         } else {
@@ -36,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         }
         //startActivity(new Intent(L));
     }
+
 
     private void beforeIntro() {
         // 약 2초간 인트로 화면을 출력.
@@ -61,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.main_activity);
 
         initAsycnTask = new InitAsycnTask(MainActivity.mainActivity);
-        initAsycnTask.execute("http://192.168.219.100:7777/device/init", "GET");
+        initAsycnTask.execute("http://192.168.219.101:7777/device/init", "GET");
 
     }
 
@@ -71,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         viewPager = (ViewPager) findViewById(R.id.fragment_containar);
         myPagerAdapter = new MyPagerAdapter(getSupportFragmentManager());
+
         viewPager.setAdapter(myPagerAdapter);
 
 
@@ -81,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
+        getMenuInflater().inflate(R.menu.main_menu, menu);
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -103,8 +112,10 @@ public class MainActivity extends AppCompatActivity {
             case R.id.trv_img:
                 viewPager.setCurrentItem(1);
                 break;
-            /*case R.id.spe_img:
-                break;*/
+            case R.id.board:
+                Intent intent1=new Intent(this, BoardListActivity.class);
+                startActivity(intent1);
+                break;
             case R.id.home_toggle:
                 viewPager.setCurrentItem(0);
                 break;

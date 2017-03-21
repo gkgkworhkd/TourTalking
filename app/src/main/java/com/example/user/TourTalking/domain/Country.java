@@ -1,4 +1,4 @@
-package com.example.user.TourTalking.domain.mian;
+package com.example.user.TourTalking.domain;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -10,9 +10,19 @@ import java.util.List;
  */
 
 public class Country implements Parcelable {
+    private int country_id;
     private int continent_id;
     private String country_name;
     private List<City> city;
+    private String country_image;
+
+    public int getCountry_id() {
+        return country_id;
+    }
+
+    public void setCountry_id(int country_id) {
+        this.country_id = country_id;
+    }
 
     public int getContinent_id() {
         return continent_id;
@@ -38,6 +48,15 @@ public class Country implements Parcelable {
         this.city = city;
     }
 
+    public String getCountry_image() {
+        return country_image;
+    }
+
+    public void setCountry_image(String country_image) {
+        this.country_image = country_image;
+    }
+
+
     @Override
     public int describeContents() {
         return 0;
@@ -45,18 +64,22 @@ public class Country implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.country_id);
         dest.writeInt(this.continent_id);
         dest.writeString(this.country_name);
         dest.writeTypedList(this.city);
+        dest.writeString(this.country_image);
     }
 
     public Country() {
     }
 
     protected Country(Parcel in) {
+        this.country_id = in.readInt();
         this.continent_id = in.readInt();
         this.country_name = in.readString();
         this.city = in.createTypedArrayList(City.CREATOR);
+        this.country_image = in.readString();
     }
 
     public static final Creator<Country> CREATOR = new Creator<Country>() {

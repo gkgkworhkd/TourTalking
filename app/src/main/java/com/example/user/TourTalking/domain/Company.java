@@ -1,4 +1,4 @@
-package com.example.user.TourTalking.domain.company;
+package com.example.user.TourTalking.domain;
 
 import android.os.Parcel;
 import android.os.Parcelable;

@@ -3,7 +3,6 @@ package com.example.user.TourTalking.main;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Parcelable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -12,8 +11,8 @@ import android.widget.TextView;
 
 import com.example.user.TourTalking.R;
 import com.example.user.TourTalking.board.BoardActivity;
-import com.example.user.TourTalking.domain.mian.CompanyBoard;
-import com.example.user.TourTalking.domain.mian.TrvBoard;
+import com.example.user.TourTalking.domain.CompanyBoard;
+import com.example.user.TourTalking.domain.TrvBoard;
 import com.example.user.TourTalking.sharing.Fragments;
 import com.example.user.TourTalking.sharing.ImageAsycnTask;
 import com.example.user.TourTalking.sharing.MainActivity;
@@ -103,5 +102,14 @@ public class NoticeItem extends LinearLayout implements View.OnClickListener {
         context.startActivity(intent);
         MainActivity mainActivity = (MainActivity) context;
         mainActivity.overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.fade_out);
+    }
+    public Parcelable getDto(){
+        return this.dto;
+    }
+    public void setDto(Parcelable dto){
+        this.dto=dto;
+    }
+    public void setCode(int code){
+        this.code=code;
     }
 }

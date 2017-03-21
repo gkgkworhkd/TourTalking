@@ -7,8 +7,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.user.TourTalking.R;
-import com.example.user.TourTalking.domain.chat.ChatList;
-import com.example.user.TourTalking.domain.chat.MemberList;
+import com.example.user.TourTalking.domain.ChatList;
+import com.example.user.TourTalking.domain.MemberList;
 
 /**
  * Created by user on 2017-02-14.

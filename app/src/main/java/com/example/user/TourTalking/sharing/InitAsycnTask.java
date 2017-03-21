@@ -1,16 +1,16 @@
-package com.example.user.TourTalking.main;
+package com.example.user.TourTalking.sharing;
 
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.example.user.TourTalking.domain.mian.City;
-import com.example.user.TourTalking.domain.mian.CompanyBoard;
-import com.example.user.TourTalking.domain.mian.Continent;
-import com.example.user.TourTalking.domain.mian.Country;
-import com.example.user.TourTalking.domain.mian.TrvBoard;
-import com.example.user.TourTalking.domain.mian.TrvBoardContent;
-import com.example.user.TourTalking.domain.mian.TrvImageUrl;
-import com.example.user.TourTalking.sharing.MainActivity;
+import com.example.user.TourTalking.domain.City;
+import com.example.user.TourTalking.domain.CompanyBoard;
+import com.example.user.TourTalking.domain.Continent;
+import com.example.user.TourTalking.domain.Country;
+import com.example.user.TourTalking.domain.TrvBoard;
+import com.example.user.TourTalking.domain.TrvBoardContent;
+import com.example.user.TourTalking.domain.TrvImageUrl;
+import com.example.user.TourTalking.estimate.EstimateCountryListActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,7 +34,7 @@ public class InitAsycnTask extends AsyncTask<String, Void, String> {
     private MainActivity mainActivity;
     private HashMap<String, List> annList = new HashMap<>();
     private HashMap<String, List> conutryList = new HashMap<>();
-
+    private EstimateCountryListActivity estimateCountryListActivity;
     //For Conntection
     URL url;
     HttpURLConnection con;
@@ -43,6 +43,10 @@ public class InitAsycnTask extends AsyncTask<String, Void, String> {
     public InitAsycnTask(MainActivity mainActivity) {
         this.mainActivity = mainActivity;
         TAG = this.getClass().getSimpleName();
+    }
+    public InitAsycnTask(EstimateCountryListActivity estimateCountryListActivity) {
+        Log.d(TAG,"실행되었다");
+        this.estimateCountryListActivity=estimateCountryListActivity;
     }
 
     @Override
@@ -141,8 +145,8 @@ public class InitAsycnTask extends AsyncTask<String, Void, String> {
                             Log.d(TAG, data.getString("trv_board_id"));
                             TrvBoard dto = new TrvBoard();
                             dto.setTrv_board_id(data.getInt("trv_board_id"));
-                            dto.setCity_name(data.getString("company_name"));
-                            dto.setCompany_name(data.getString("city_name"));
+                            dto.setCity_name(data.getString("city_name"));
+                            dto.setCompany_name(data.getString("company_name"));
                             dto.setTrv_board_title(data.getString("trv_board_title"));
                            // dto.setTrv_board_content(data.getString("trv_board_content"));
                             dto.setTrv_board_hit(data.getInt("trv_board_hit"));
@@ -177,9 +181,11 @@ public class InitAsycnTask extends AsyncTask<String, Void, String> {
                         for (int a = 0; a < dataArray.length(); a++) {
                             JSONObject data = dataArray.getJSONObject(a);
                             Country dto = new Country();
+                            dto.setCountry_id(data.getInt("country_id"));
                             dto.setCountry_name(data.getString("country_name"));
                             dto.setContinent_id(data.getInt("continent_id"));
                             dto.setCity(getCityName(data.getString("city")));
+                            dto.setCountry_image(data.getString("country_image"));
                             Log.d(TAG, data.getString("country_name"));
                             list.add(dto);
                         }
@@ -200,7 +206,12 @@ public class InitAsycnTask extends AsyncTask<String, Void, String> {
         } catch (JSONException e) {
             e.printStackTrace();
         } finally {
-            mainActivity.init();
+            if(mainActivity!=null){
+                mainActivity.init();
+            }else if(estimateCountryListActivity!=null){
+                estimateCountryListActivity.init();
+            }
+
         }
 
     }
@@ -232,7 +243,7 @@ public class InitAsycnTask extends AsyncTask<String, Void, String> {
         return citie;
     }
 
-    private List<TrvImageUrl> getTrvBoarImage(String json) {
+    public List<TrvImageUrl> getTrvBoarImage(String json) {
         List<TrvImageUrl> trvImageUrls = new ArrayList<TrvImageUrl>();
         try {
             JSONArray array = new JSONArray(json);
@@ -249,7 +260,7 @@ public class InitAsycnTask extends AsyncTask<String, Void, String> {
 
         return trvImageUrls;
     }
-    private List<TrvBoardContent> getTrvBoardContent(String json) {
+    public List<TrvBoardContent> getTrvBoardContent(String json) {
         List<TrvBoardContent> trvBoardContents = new ArrayList<TrvBoardContent>();
             try {
                 JSONArray array = new JSONArray(json);

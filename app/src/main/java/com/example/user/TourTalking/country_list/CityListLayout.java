@@ -15,13 +15,11 @@ public class CityListLayout extends LinearLayout{
     public TextView textView;
     public CityListLayout(Context context) {
         super(context);
-        setBackgroundColor(Color.WHITE);
         setOrientation(LinearLayout.HORIZONTAL);
         textView=new TextView(context);
-        textView.setLayoutParams(new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT,1));
-        textView.setGravity(Gravity.CENTER);
+        textView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, 120));
         setPadding(5,5,0,5);
-        textView.setBackgroundColor(Color.parseColor("#292d38"));
+        textView.setBackgroundColor(Color.parseColor("#eaeaea"));
         textView.setTextColor(Color.parseColor("#919191"));
         addView(textView);
     }

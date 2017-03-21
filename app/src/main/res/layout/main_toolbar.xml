@@ -4,41 +4,47 @@
     android:layout_height="?attr/actionBarSize"
     android:layout_alignParentTop="true"
     android:layout_centerHorizontal="true"
-    android:background="#191d25">
+    android:background="#d4d4d4">
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <ImageView
-            android:id="@+id/home_toggle"
-            android:src="@drawable/home"
-            android:layout_weight="3"
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:onClick="MainBt"
-            />
+            android:orientation="horizontal">
 
-        <ImageView
-            android:layout_marginLeft="4dp"
-            android:layout_marginTop="10dp"
-            android:src="@drawable/tour"
-            android:layout_weight="3"
-            android:layout_width="match_parent"
-            android:layout_height="40sp" />
+            <ImageView
+                android:id="@+id/home_toggle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:onClick="MainBt"
+                android:src="@drawable/home" />
 
-        <TextView
-            android:textColor="#ddffffff"
-            android:textStyle="bold"
-            android:layout_marginLeft="50sp"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:text="TOUR TALKING"
-            android:textSize="@dimen/activity_horizontal_margin" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="40sp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="3"
+                android:src="@drawable/tour" />
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="50sp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="TOUR TALKING"
+                android:textColor="#dda7a7a7"
+                android:textSize="@dimen/activity_horizontal_margin"
+                android:textStyle="bold" />
+
+        </LinearLayout>
     </LinearLayout>
+
 
 </android.support.v7.widget.Toolbar>
 

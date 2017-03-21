@@ -3,9 +3,13 @@ package com.example.user.TourTalking.country_list;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.example.user.TourTalking.company.CompanyActivity;
-import com.example.user.TourTalking.domain.company.Company;
+import com.example.user.TourTalking.domain.Company;
+import com.example.user.TourTalking.estimate.EstimateActivity;
+import com.example.user.TourTalking.estimate.EstimateChoiceCompanyActivity;
+import com.example.user.TourTalking.estimate.EstimateCountryListActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,8 +34,10 @@ public class CompanyLsitAsycnTask extends AsyncTask<String, Void, String> {
     private HttpURLConnection con;
     private String TAG;
     private String cityName;
-    public CompanyLsitAsycnTask(Context context) {
+    private int type;
+    public CompanyLsitAsycnTask(Context context,int type) {
         this.context = context;
+        this.type=type;
     }
 
     @Override
@@ -98,7 +104,14 @@ public class CompanyLsitAsycnTask extends AsyncTask<String, Void, String> {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        intent = new Intent(context, CompanyActivity.class);
+        if(type!=EstimateActivity.CHCOMPNAY){
+            intent = new Intent(context, CompanyActivity.class);
+        }else {
+            Log.d(TAG,type+" 이 실행되었다");
+            Log.d(TAG,companies.get(2).getCompany_name()+"이 있따");
+            intent = new Intent(context, EstimateChoiceCompanyActivity.class);
+        }
+
         intent.putExtra("cityName",cityName);
         intent.putParcelableArrayListExtra("compList", companies);
         context.startActivity(intent);

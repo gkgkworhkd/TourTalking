@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#eaeaea"
+    >
+
+    <ListView
+        android:layout_weight="9"
+        android:id="@+id/est_choiceCompany"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"></ListView>
+
+    <TextView
+        android:onClick="estimate_choicecomp"
+        android:background="@drawable/rounded_estimate_left"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="27dp"
+        android:text="요청서 보내기"
+        android:layout_margin="10dp"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp" />
+</LinearLayout>

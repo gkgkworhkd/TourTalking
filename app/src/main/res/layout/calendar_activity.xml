@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="#9bd6ff"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+        <TextView
+            android:id="@+id/est_plan_title"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:background="#9bd6ff"
+            android:textColor="#ffffff"
+            android:textSize="15sp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@+id/gridview"
+            android:layout_weight="0.3">
+
+            <ImageView
+                android:id="@+id/calender_before"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:onClick="calBt"
+                android:src="@drawable/before" />
+        </LinearLayout>
+
+        <GridView
+            android:id="@+id/gridview"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="10dp"
+            android:layout_weight="4"
+            android:listSelector="#c6deff"
+            android:numColumns="7"></GridView>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_alignRight="@id/gridview"
+            android:layout_weight="0.3">
+
+            <ImageView
+                android:id="@+id/calender_next"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:onClick="calBt"
+                android:src="@drawable/next" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.7">
+
+        <TextView
+            android:id="@+id/calender_req"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="20dp"
+            android:background="@drawable/rounded_estimate_left"
+            android:gravity="center"
+            android:onClick="calBt"
+            android:text="선택하기" />
+    </LinearLayout>
+
+</LinearLayout>

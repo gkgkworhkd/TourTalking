@@ -1,35 +1,33 @@
-<android.support.v7.widget.Toolbar
-    android:id="@+id/toolbar"
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/chat_toolbar"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
-    android:background="#fffef4"
     android:layout_alignParentTop="true"
     android:layout_centerHorizontal="true"
-    xmlns:android="http://schemas.android.com/apk/res/android" >
+    android:background="#fffef4">
+
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
         <TextView
-            android:gravity="center_vertical"
-            android:layout_weight="1"
-            android:text="TOURLTALKING"
-            android:textSize="@dimen/activity_horizontal_margin"
-            android:layout_width="0dp"
-            android:layout_height="match_parent" />
-        <TextView
-            android:id="@+id/chat_back"
-            android:text="뒤로가기"
-            android:textStyle="bold"
-            android:textAlignment="textEnd"
-            android:gravity="end|center_vertical"
-            android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:onClick="Chat_OnClick"
-            />
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="TOURLTALKING"
+            android:textSize="@dimen/activity_horizontal_margin" />
+        <TextView
+            android:onClick="reqEstimate"
+            android:gravity="center"
+            android:textSize="20dp"
+            android:text="견적요청"
+            android:layout_weight="0.5"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
     </LinearLayout>
 
-    </android.support.v7.widget.Toolbar>
+</android.support.v7.widget.Toolbar>
 
 

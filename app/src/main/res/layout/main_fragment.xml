@@ -2,41 +2,45 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#191d25"
-    >
+    android:background="#eaeaea"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:layout_marginTop="15dp"
+        android:background="#FFFF"
         android:layout_weight="0.8">
 
         <ImageView
-            android:src="@drawable/earth"
+            android:layout_marginBottom="6dp"
             android:id="@+id/trv_img"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="#eaeaea"
             android:onClick="MainBt"
-             />
+            android:src="@drawable/earth" />
 
         <ImageView
+            android:layout_marginBottom="6dp"
             android:id="@+id/talk_img"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="#eaeaea"
             android:onClick="MainBt"
-            android:src="@drawable/chat"
-            />
+            android:src="@drawable/chat" />
 
         <ImageView
+            android:layout_marginBottom="6dp"
             android:id="@+id/board"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="#eaeaea"
             android:onClick="MainBt"
             android:src="@drawable/bag" />
     </LinearLayout>
@@ -44,11 +48,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_margin="8dp"
         android:layout_marginTop="20dp"
         android:layout_weight="4"
+        android:background="#ffffff"
         android:orientation="vertical">
 
-        <TextView
+        <!--<TextView
             android:textStyle="bold"
             android:textColor="#6b7281"
             android:layout_width="match_parent"
@@ -72,13 +78,15 @@
             android:layout_height="0dp"
             android:layout_weight="0.4"
             android:gravity="center"
-            android:text="특가상품" />
+            android:text="특가상품" />-->
 
         <ListView
             android:id="@+id/trv_item"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="3" />
+            android:layout_weight="3"
+            android:divider="#eaeaea"
+            android:dividerHeight="5dp" />
     </LinearLayout>
 
 </LinearLayout>

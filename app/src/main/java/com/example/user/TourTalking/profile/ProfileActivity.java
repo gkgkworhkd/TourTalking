@@ -9,7 +9,7 @@ import android.widget.ImageView;
 
 import com.example.user.TourTalking.R;
 import com.example.user.TourTalking.chat.ChatActivity;
-import com.example.user.TourTalking.domain.company.Company;
+import com.example.user.TourTalking.domain.Company;
 import com.example.user.TourTalking.sharing.ImageAsycnTask;
 
 /**
@@ -32,7 +32,9 @@ public class ProfileActivity extends AppCompatActivity{
         int id=view.getId();
         if(id==R.id.profile_chat){
             Intent intent=new Intent(this, ChatActivity.class);
-            intent.putExtra("compData",dto);
+            intent.putExtra(ChatActivity.GRUOPCHAT,dto);
+            //TODO 회원 로그인시 해당 회원에 대한 정보전달
+
             startActivity(intent);
         }else if(id==R.id.profile_content){
 

@@ -2,14 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#191d25"
+    android:background="#eaeaea"
     >
     <ExpandableListView
         android:id="@+id/expanded_menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:dividerHeight="4dp"
-        android:divider="#2d3640"
+        android:divider="#FFFF"
+        android:groupIndicator="@null"
         >
 
     </ExpandableListView>
