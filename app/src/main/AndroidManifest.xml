@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.user.TourTalking">
-
     <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="true"
@@ -28,9 +27,6 @@
         <activity
             android:name="com.example.user.TourTalking.chat.ChatActivity"
             android:windowSoftInputMode="adjustPan">
-            <intent-filter>
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".board.BoardActivity"></activity>
         <activity android:name=".board.BoardListActivity" />
@@ -39,7 +35,6 @@
             android:launchMode="singleTask"></activity>
         <activity android:name=".estimate.EstimateCountryListActivity"></activity>
         <activity android:name=".calender.CalendarActivity">
-
         </activity><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
         <meta-data
@@ -51,6 +46,8 @@
             ></activity>
         <activity android:name=".estimate.EstimateResultActivity"/>
         <activity android:name=".estimate.EstimateChoiceCompanyActivity"/>
+        <activity android:name=".writeboard.WriteBoardActivity">
+        </activity>
     </application>
 
 </manifest>

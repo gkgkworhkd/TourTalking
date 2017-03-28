@@ -88,8 +88,8 @@ public class NoticeItem extends LinearLayout implements View.OnClickListener {
 
 
     public void init() {
-        itemName = (TextView) view.findViewById(R.id.title);
-        itemTitle = (TextView) view.findViewById(R.id.content);
+        itemName = (TextView) view.findViewById(R.id.content);
+        itemTitle = (TextView) view.findViewById(R.id.title);
         itemImage = (ImageView) view.findViewById(R.id.company_img);
     }
 

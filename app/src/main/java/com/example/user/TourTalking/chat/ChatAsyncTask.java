@@ -6,6 +6,9 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -53,6 +56,7 @@ public class ChatAsyncTask extends AsyncTask<String, Void, String> {
                             closeConnection();
                             break;
                         }
+
                         Bundle bundle = new Bundle();
                         bundle.putCharSequence("msg", msg);
                         Message message = new Message();
@@ -112,6 +116,9 @@ public class ChatAsyncTask extends AsyncTask<String, Void, String> {
             socket = new Socket(params[0], Integer.parseInt(params[1]));
             buffr = new BufferedReader(new InputStreamReader(socket.getInputStream(), "utf-8"));
             buffw = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream(), "utf-8"));
+            buffw.write(params[2]);
+            buffw.write("\n");
+            buffw.flush();
             listen();
             send();
             //받은 메세지를 내 화면에 뿌린다.!

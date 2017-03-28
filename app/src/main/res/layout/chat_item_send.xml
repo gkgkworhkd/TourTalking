@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="match_parent">
-<TextView
-    android:id="@+id/send_Message"
-    android:background="#ffed79"
-    android:text="안녕나는재광이야"
-    android:textAlignment="textEnd"
-    android:layout_gravity="end"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" />
-</LinearLayout>
+
+    <TextView
+        android:layout_alignParentRight="true"
+        android:background="@drawable/rounded_chat_send"
+        android:textSize="14dp"
+        android:padding="10dp"
+        android:layout_marginRight="9dp"
+        android:id="@+id/send_Message"
+        android:text="안녕나는재광"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</RelativeLayout>

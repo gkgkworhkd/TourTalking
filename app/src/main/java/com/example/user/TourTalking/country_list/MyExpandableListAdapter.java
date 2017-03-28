@@ -43,6 +43,7 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
     private ViewHolder viewHolder;
     private View _view;
     private String TAG;
+
     public MyExpandableListAdapter(Context context, List<String> listDataHeader, HashMap<String, List<Country>> _countryListData, HashMap<String, List<String>> listDataChat, View view, HashMap<String, List<ArrayList<City>>> _cityListData
     ) {
         TAG = this.getClass().getSimpleName();
@@ -96,26 +97,26 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
         LinearLayout linearLayout = (LinearLayout) convertView.findViewById(R.id.libListItem);
         TextView chat_name = (TextView) convertView.findViewById(R.id.country_chat_name);
         ImageView country_img = (ImageView) convertView.findViewById(R.id.country_img);
-        ImageAsycnTask imageAsycnTask=new ImageAsycnTask(country_img,50);
+        ImageAsycnTask imageAsycnTask = new ImageAsycnTask(country_img, 50);
 
-        countryName=country.getCountry_name();
+        countryName = country.getCountry_name();
         chat_name.setText(countryName);
         chat_name.append(" 단체 채팅방");
         chat_name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(MainActivity.mainActivity.memberInfo[0]==null){
+                if (MainActivity.mainActivity.memberInfo[0] == null) {
                     //TODO 비로그인시 알림창 활성화
-                    Log.d(TAG,"로그인 후 사용하실수있는 메뉴입니다.");
-                }else{
+                    Log.d(TAG, "로그인 후 사용하실수있는 메뉴입니다.");
+                } else {
                     Intent intent = new Intent(_context, ChatActivity.class);
                     Log.d(TAG, country.getCountry_id() + "선택된 도시의 아이디");
                     intent.putExtra(ChatActivity.COUNTRYID, Integer.toString(country.getCountry_id()));
                     intent.putExtra(ChatActivity.GROUPTYPE, "country");
+                    intent.putExtra("protocol",getProtocol(country));
                     //TODO 로그인된 맴버 PK 전송
                     _context.startActivity(intent);
                 }
-
             }
         });
         //String[] cityName = (String[]) childText[1]);\
@@ -127,7 +128,8 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
             }
         } else {
             //txtListChild.setText(childText);
-            linearLayout.addView(getCityListLayout(country.getCountry_name()));
+            //linearLayout.addView(getCityListLayout(country.getCountry_name()));
+            linearLayout.addView(getCityListLayout(" "));
            /* chat_name.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -141,6 +143,19 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
         imageAsycnTask.execute(country.getCountry_image());
         return convertView;
     }
+
+    public String getProtocol(Country country) {
+        StringBuffer sb = new StringBuffer();
+        sb.append("{");
+        sb.append("\"chat-type\":\"group\",");
+        sb.append("\"group-type\":\"" + "country" + "\",");
+        sb.append("\"group-id\":" + Integer.toString(country.getCountry_id()) + ",");
+        sb.append("\"member-type\":\"" + MainActivity.mainActivity.memberInfo[0] + "\",");
+        sb.append("\"member-id\":\"" + MainActivity.mainActivity.memberInfo[1] + "\"");
+        sb.append("}");
+        return sb.toString();
+    }
+
 
     public CityListLayout getCityListLayout(final String text) {
         CityListLayout listLayout = new CityListLayout(_context);
@@ -157,22 +172,24 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
             @Override
             public void onClick(View v) {
                 Toast.makeText(_context, text + " 를 눌럿다", Toast.LENGTH_SHORT).show();
-                if(_context.equals(MainActivity.mainActivity)){
-                    CompanyLsitAsycnTask companyLsitAsycnTask = new CompanyLsitAsycnTask(_context,0);
+                if (_context.equals(MainActivity.mainActivity)) {
+                    CompanyLsitAsycnTask companyLsitAsycnTask = new CompanyLsitAsycnTask(_context, 0);
                     companyLsitAsycnTask.execute("http://192.168.219.101:7777/device/compList?city_name=", "GET", text);
-                }else if(_context.equals(EstimateCountryListActivity.estimateCountryListActivity)){
-                    _context.startActivity(new Intent(_context, EstimateActivity.class).putExtra("countName",countryName+" "+text));
+                } else if (_context.equals(EstimateCountryListActivity.estimateCountryListActivity)) {
+                    _context.startActivity(new Intent(_context, EstimateActivity.class).putExtra("countName", countryName + " " + text));
                 }
             }
         });
         return listLayout;
     }
+
     //차일드 뷰의 사이즈 반환
     @Override
     public int getChildrenCount(int groupPosition) {
         return this._countryListData.get(this._listDataHeader.get(groupPosition))
                 .size();
     }
+
     //그룹 포지션 반환
     @Override
     public Object getGroup(int groupPosition) {

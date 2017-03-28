@@ -8,9 +8,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.user.TourTalking.R;
 import com.example.user.TourTalking.domain.City;
@@ -79,13 +81,13 @@ public class Fragments extends android.support.v4.app.Fragment {
             context = (MainActivity) getContext();
             initData.add(context.initAsycnTask.getConutryList());
             SetData();
-            infoInit(view,R.id.expanded_menu,context);
-        }else if(id==R.layout.estimate_complist_fragment){
+            infoInit(view, R.id.expanded_menu, context);
+        } else if (id == R.layout.estimate_complist_fragment) {
             activity = (EstimateCountryListActivity) getContext();
             initData.add(activity.initAsycnTask.getConutryList());
-            Log.d(TAG,activity.initAsycnTask.getConutryList()+"견적서 데이터 가 있다");
+            Log.d(TAG, activity.initAsycnTask.getConutryList() + "견적서 데이터 가 있다");
             SetData();
-            infoInit(view,R.id.expanded_menu_estmate,activity);
+            infoInit(view, R.id.expanded_menu_estmate, activity);
         }
         return view;
     }
@@ -114,24 +116,20 @@ public class Fragments extends android.support.v4.app.Fragment {
         myListView[0].setAdapter(listViewAdapter[0]);
     }
 
-    public void infoInit(final View view, int id, Context context) {
+    public void infoInit(final View view, int id, final Context context) {
         expandableListView = (ExpandableListView) view.findViewById(id);
         expandableListAdapter = new MyExpandableListAdapter(context, listDataHeader, listDataChild, listDataChatHeaer, view, listChatChild);
         expandableListView.setAdapter(expandableListAdapter);
         expandableListView.expandGroup(2);
-        //ListViewSizeManager.getTotalHeightofListView(expandableListView);
-        expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-            @Override
-            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                return false;
-            }
-        });
+        expandableListView.smoothScrollToPosition(expandableListAdapter.getGroupCount());
+
+
         //그룹이 열릴 경우 이벤트 발생
         expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
             @Override
             public void onGroupExpand(int groupPosition) {
-                for(int i=0;i<expandableListAdapter.getGroupCount();i++){
-                    if(i!=groupPosition){
+                for (int i = 0; i < expandableListAdapter.getGroupCount(); i++) {
+                    if (i != groupPosition) {
                         expandableListView.collapseGroup(i);
                     }
                 }
@@ -141,6 +139,7 @@ public class Fragments extends android.support.v4.app.Fragment {
         expandableListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
             @Override
             public void onGroupCollapse(int groupPosition) {
+
             }
         });
         //차일드 뷰를 눌럿을 경우 이벤트 발생

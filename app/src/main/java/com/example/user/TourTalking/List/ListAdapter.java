@@ -7,6 +7,7 @@ import android.widget.BaseAdapter;
 
 import com.example.user.TourTalking.R;
 import com.example.user.TourTalking.domain.ChatList;
+import com.example.user.TourTalking.domain.Company;
 import com.example.user.TourTalking.domain.MemberList;
 
 /**
@@ -15,22 +16,23 @@ import com.example.user.TourTalking.domain.MemberList;
 
 public class ListAdapter extends BaseAdapter {
 
-    private Context context;
+    private ListActivity context;
     private int code;
 
+
     public ListAdapter(Context context, int code) {
-        this.context = context;
+        this.context = (ListActivity) context;
         this.code = code;
     }
 
     @Override
     public int getCount() {
-        return 8;
+        return context.arr.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return context.arr.get(position);
     }
 
     @Override
@@ -41,12 +43,12 @@ public class ListAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = null;
-
+        Company company=(Company) context.arr.get(position);
         if (code == R.layout.chatlist_member_fragment) {
             MemberList dto = new MemberList();
-            dto.setImg("이미지 이름.jpg");
-            dto.setMember_id(32);
-            dto.setNickName("좋은 여행사");
+            dto.setImg(company.getImage_url());
+            dto.setMember_id(company.getCompany_id());
+            dto.setNickName(company.getCompany_name());
             view = new MemberItem(context, dto);
 
         } else if (code == R.layout.chatlist_list_fragment) {

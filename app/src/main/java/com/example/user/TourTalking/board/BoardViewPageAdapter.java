@@ -4,6 +4,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import com.example.user.TourTalking.domain.TrvImageUrl;
+
+import java.util.List;
+
 /**
  * Created by user on 2017-02-27.
  */
@@ -14,6 +18,7 @@ public class BoardViewPageAdapter extends FragmentStatePagerAdapter{
         super(fm);
         fragment=new BoardFragment();
     }
+
 
     @Override
     public int getCount() {

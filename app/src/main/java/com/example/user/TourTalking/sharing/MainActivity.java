@@ -2,6 +2,7 @@ package com.example.user.TourTalking.sharing;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.PersistableBundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.example.user.TourTalking.List.FriendLsitAsycnTask;
 import com.example.user.TourTalking.List.ListActivity;
 import com.example.user.TourTalking.R;
 import com.example.user.TourTalking.board.BoardListActivity;
@@ -25,9 +27,10 @@ public class MainActivity extends AppCompatActivity {
     boolean isRunIntro=true;
     //TODO 임시 MEMBERTYPE&PK
     String memberType="coustomer";
-    int member_pk=1;
+    String member_pk="손님";
     Bundle savedInstanceState;
-    public String[] memberInfo={memberType,Integer.toString(member_pk)};
+    public String[] memberInfo={memberType,member_pk};
+    public Handler handler=new Handler();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,8 +109,9 @@ public class MainActivity extends AppCompatActivity {
     public void MainBt(View view) {
         switch (view.getId()) {
             case R.id.talk_img:
-                Intent intent = new Intent(this, ListActivity.class);
-                startActivity(intent);
+                FriendLsitAsycnTask asycnTask=new FriendLsitAsycnTask(this);
+                //TODO 친구목록을 요청하는 서버 작업및 요청
+                asycnTask.execute("http://192.168.219.101:7777/device/compList?city_name=", "GET","테스트2-1");
                 break;
             case R.id.trv_img:
                 viewPager.setCurrentItem(1);

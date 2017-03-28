@@ -19,6 +19,7 @@
             android:text="TOURLTALKING"
             android:textSize="@dimen/activity_horizontal_margin" />
         <TextView
+            android:id="@+id/chat_toolbar_reqtext"
             android:onClick="reqEstimate"
             android:gravity="center"
             android:textSize="20dp"

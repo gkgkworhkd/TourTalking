@@ -20,6 +20,9 @@ import com.example.user.TourTalking.R;
 import com.example.user.TourTalking.estimate.EstimateActivity;
 import com.example.user.TourTalking.sharing.MainActivity;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 /**
@@ -35,7 +38,6 @@ public class ChatActivity extends AppCompatActivity {
     private Parcelable dto;
     private String groupType;
     private int group_id;
-
     /*
     * --------------------------상수
     * */
@@ -46,6 +48,7 @@ public class ChatActivity extends AppCompatActivity {
     public static final String COUNTRYID = "country_id";
     public static final String GROUPTYPE = "groupType";
 
+    String protocol;
 
     Handler handler = new Handler() {
         @Override
@@ -55,7 +58,19 @@ public class ChatActivity extends AppCompatActivity {
             Bundle bundle = msg.getData();
             String message = bundle.getCharSequence("msg").toString();
             Log.d(TAG, "message : " + message);
-            adapter.chatSize.add(getSendMessage(message));
+            try {
+                JSONObject obj = new JSONObject(message);
+                if (obj.getString("member-id").equals(MainActivity.mainActivity.memberInfo[1])) {
+                    adapter.chatSize.add(getSendMessage(obj.getString("message")));
+                }else {
+                    String[] receviMesg={obj.getString("member-id"),obj.getString("message")};
+                    adapter.chatSize.add(getReceiveMessage(receviMesg));
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
         }
 
 
@@ -67,7 +82,6 @@ public class ChatActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-
     }
 
     @Override
@@ -77,11 +91,11 @@ public class ChatActivity extends AppCompatActivity {
         TAG = this.getClass().getSimpleName();
         init();
         connect();
-        Toolbar toolbar = (Toolbar) findViewById(R.id.chat_toolbar);
-        setSupportActionBar(toolbar);
+
+
     }
 
-    public void reqEstimate(View view){
+    public void reqEstimate(View view) {
         Intent intent = new Intent(this, EstimateActivity.class);
         startActivity(intent);
     }
@@ -103,39 +117,57 @@ public class ChatActivity extends AppCompatActivity {
 
     public void connect() {
         asyncTask = new ChatAsyncTask(this);
-        asyncTask.execute("192.168.219.101", "8888");
+        asyncTask.execute("192.168.219.101", "8888", protocol);
     }
 
     public void parseIntent(Intent intent) {
+        Log.d(TAG, "parseIntent 활성화");
         if (MainActivity.mainActivity.memberInfo[0] != null) {
             if ((groupType = intent.getStringExtra(GROUPTYPE)) != null) {
                 group_id = Integer.parseInt(intent.getStringExtra(COUNTRYID));
+                protocol = intent.getStringExtra("protocol");
+                Toolbar toolbar = (Toolbar) findViewById(R.id.chat_toolbar);
+                TextView toolText = (TextView) toolbar.findViewById(R.id.chat_toolbar_reqtext);
+                toolText.setText("");
+                setSupportActionBar(toolbar);
                 chatType = GRUOPCHAT;
+                Log.d(TAG, "그룹채팅 활성화");
+                Log.d(TAG, protocol);
 
             } else if ((dto = intent.getParcelableExtra(INDIVICHAT)) != null) {
+                Toolbar toolbar = (Toolbar) findViewById(R.id.chat_toolbar);
+                setSupportActionBar(toolbar);
                 chatType = INDIVICHAT;
+                Log.d(TAG, "개인채팅 활성화");
             }
         }
-
     }
-
 
     public void bt_send(View view) {
 
-        if (asyncTask != null && chatType == GRUOPCHAT) {
+        /*if (asyncTask != null && chatType == GRUOPCHAT) {
             //asyncTask.msg = getGroupProtocol(sendMsg.getText().toString());
-            Log.d(TAG, getGroupProtocol(sendMsg.getText().toString()));
-            asyncTask.msg = getGroupProtocol(sendMsg.getText().toString());
+           // Log.d(TAG, getGroupProtocol(sendMsg.getText().toString()));
+           // asyncTask.msg = getGroupProtocol(sendMsg.getText().toString());
+            asyncTask.msg=sendMsg.getText().toString();
             sendMsg.setText("");
+
         } else if (asyncTask != null && chatType == INDIVICHAT) {
-            asyncTask.msg = getIndividualProtocol(sendMsg.getText().toString());
+           // asyncTask.msg = getIndividualProtocol(sendMsg.getText().toString());
+            asyncTask.msg=sendMsg.getText().toString();
             sendMsg.setText("");
-        }
+        }*/
+
+        asyncTask.msg = sendMsg.getText().toString();
+        sendMsg.setText("");
     }
 
     public SendMessage getSendMessage(String msg) {
         SendMessage item = new SendMessage(this, msg);
-
+        return item;
+    }
+    public ReceiveMessage getReceiveMessage(String[] msg){
+        ReceiveMessage item=new ReceiveMessage(this,msg);
         return item;
     }
 
@@ -147,12 +179,14 @@ public class ChatActivity extends AppCompatActivity {
         sb.append("\"group-type\":\"" + groupType + "\",");
         sb.append("\"group-id\":" + group_id + ",");
         sb.append("\"member-type\":\"" + MainActivity.mainActivity.memberInfo[0] + "\",");
-        sb.append("\"member-id\":" + Integer.parseInt(MainActivity.mainActivity.memberInfo[1]) + "");
+        sb.append("\"member-id\":\"" + MainActivity.mainActivity.memberInfo[1] + "\"");
         sb.append("},");
         sb.append("\"message\":\"" + msg + "\"");
         sb.append("}");
         return sb.toString();
+
     }
+
 
     private String getIndividualProtocol(String msg) {
         StringBuffer sb = new StringBuffer();

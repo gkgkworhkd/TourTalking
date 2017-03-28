@@ -252,6 +252,7 @@ public class InitAsycnTask extends AsyncTask<String, Void, String> {
                 JSONObject obj = (JSONObject) array.get(i);
                 trvImageUrl.setImage_url(obj.getString("image_url"));
                 trvImageUrl.setTrv_image_id(obj.getInt("trv_image_id"));
+                trvImageUrl.setTrv_image_content(obj.getString("trv_image_content"));
                 trvImageUrls.add(trvImageUrl);
             }
         } catch (JSONException e) {
