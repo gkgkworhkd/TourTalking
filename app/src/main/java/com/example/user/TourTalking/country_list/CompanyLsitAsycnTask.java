@@ -18,9 +18,11 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 /**
@@ -35,23 +37,39 @@ public class CompanyLsitAsycnTask extends AsyncTask<String, Void, String> {
     private String TAG;
     private String cityName;
     private int type;
-    public CompanyLsitAsycnTask(Context context,int type) {
+    String destUrl;
+    int city_id=0;
+
+    public CompanyLsitAsycnTask(Context context, int type) {
+
         this.context = context;
-        this.type=type;
+        this.type = type;
+    }
+    public CompanyLsitAsycnTask(Context context, int type,int city_id) {
+        this.context = context;
+        this.type = type;
+        this.city_id = city_id;
     }
 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
+        TAG=this.getClass().getSimpleName();
     }
 
     @Override
     protected String doInBackground(String... params) {
         StringBuffer sb = null;
         BufferedReader buffr = null;
-        cityName=params[2];
+        Log.d(TAG, "doinBack 실행");
+        cityName = params[2];
         try {
-            url = new URL(params[0]+params[2]);
+            try {
+                destUrl = URLEncoder.encode(params[2], "utf-8");
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+            url = new URL(params[0] + destUrl);
             con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod(params[1]);
             con.setDoInput(true);
@@ -104,15 +122,16 @@ public class CompanyLsitAsycnTask extends AsyncTask<String, Void, String> {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        if(type!=EstimateActivity.CHCOMPNAY){
+        if (type != EstimateActivity.CHCOMPNAY) {
             intent = new Intent(context, CompanyActivity.class);
-        }else {
-            Log.d(TAG,type+" 이 실행되었다");
-            Log.d(TAG,companies.get(2).getCompany_name()+"이 있따");
+        } else {
+            Log.d(TAG, type + " 이 실행되었다");
+            Log.d(TAG, companies.get(2).getCompany_name() + "이 있따");
             intent = new Intent(context, EstimateChoiceCompanyActivity.class);
         }
 
-        intent.putExtra("cityName",cityName);
+        intent.putExtra("cityName", cityName);
+        intent.putExtra("cityId", city_id);
         intent.putParcelableArrayListExtra("compList", companies);
         context.startActivity(intent);
 

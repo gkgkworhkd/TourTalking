@@ -74,7 +74,6 @@
                         android:layout_height="match_parent"
                         android:layout_weight="3.5"
                         android:gravity="center_vertical"
-                        android:text="대만 타이베이"
                         android:textColor="#769dff"
                         android:textSize="13dp"
                         android:id="@+id/est_destName" />
@@ -108,59 +107,27 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2.5"
                 android:background="@drawable/rounded_estimate"
-                android:orientation="horizontal">
-
+                android:orientation="vertical"
+                android:paddingLeft="10dp">
 
                 <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/rounded_estimate">
+
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="3.5">
 
                     <TextView
                         android:onClick="estimateBt"
-                        android:id="@+id/est_s"
-                        android:layout_width="0dp"
+                        android:id="@+id/est_depature"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginLeft="15dp"
-                        android:layout_weight="3"
                         android:gravity="center_vertical"
-                        android:text="서울"
-                        android:textStyle="bold"></TextView>
-
-                    <ImageView
-                        android:id="@+id/est_s_img"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1" />
+                        android:textColor="#769dff"
+                        android:textSize="15dp"
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/rounded_estimate">
-
-                    <TextView
-                        android:onClick="estimateBt"
-                        android:id="@+id/est_b"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="15dp"
-                        android:layout_weight="3"
-                        android:gravity="center_vertical"
-                        android:text="부산"
-                        android:textStyle="bold"></TextView>
-
-                    <ImageView
-                        android:id="@+id/est_b_img"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="15dp"
-                        android:layout_weight="1"></ImageView>
-
-                </LinearLayout>
 
             </LinearLayout>
         </LinearLayout>
@@ -179,7 +146,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/rounded_estimate"
                 android:gravity="center"
-                android:text="여행일정"
+                android:text="출발일"
                 android:textSize="15dp"
                 android:textStyle="bold"></TextView>
 
@@ -206,6 +173,53 @@
                         android:textColor="#769dff"
                         android:textSize="15dp"
                         android:textStyle="bold" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_margin="10dp"
+            android:background="#FFFFFF"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_estimate"
+                android:gravity="center"
+                android:text="도착일"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:id="@+id/textView16"></TextView>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2.5"
+                android:background="@drawable/rounded_estimate"
+                android:orientation="vertical"
+                android:paddingLeft="10dp">
+
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="3.5">
+
+                    <TextView
+                        android:onClick="estimateBt"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:textColor="#769dff"
+                        android:textSize="15dp"
+                        android:textStyle="bold"
+                        android:id="@+id/est_plan_arrve" />
 
                 </LinearLayout>
 
@@ -252,13 +266,15 @@
                         android:layout_weight="3"
                         android:gravity="center_vertical"
                         android:text="성인"
-                        android:textStyle="bold"></TextView>
+                        android:textStyle="bold"
+                        ></TextView>
 
                     <EditText
+                        android:hint="0"
+                        android:inputType="number"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:text="2"
+                        android:layout_weight="1.8"
                         android:textColor="#769dff"
                         android:id="@+id/est_adult" />
 
@@ -281,12 +297,13 @@
                         android:textStyle="bold"></TextView>
 
                     <EditText
+                        android:hint="0"
+                        android:inputType="number"
                         android:id="@+id/est_child"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginRight="15dp"
-                        android:layout_weight="1"
-                        android:hint="0"
+                        android:layout_weight="1.8"
                         android:textColor="#769dff" />
                 </LinearLayout>
             </LinearLayout>
@@ -325,11 +342,12 @@
                     android:paddingLeft="20dp">
 
                     <EditText
+                        android:textAlignment="textEnd"
+                        android:hint="0"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="3.5"
-                        android:gravity="center_vertical"
-                        android:text="1,400,000"
+                        android:gravity="end"
                         android:textSize="23dp"
                         android:id="@+id/est_totalpay"
                         android:inputType="number"
@@ -464,7 +482,9 @@
 
                     </TableRow>
 
-                    <TableRow>
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
 
                         <CheckedTextView
                             android:id="@+id/check_business"

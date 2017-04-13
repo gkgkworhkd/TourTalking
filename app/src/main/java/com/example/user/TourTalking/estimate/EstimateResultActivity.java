@@ -20,6 +20,7 @@ public class EstimateResultActivity extends AppCompatActivity{
         setContentView(R.layout.estimate_result_activity);
     }
     public void resultBt(View view){
-        startActivity(new Intent(this, MainActivity.class).putExtra("intro", false));
+        this.finish();
+        //startActivity(new Intent(this, MainActivity.class).putExtra("intro", false));
     }
 }

@@ -29,7 +29,7 @@ public class EstimatePopupActivity extends AppCompatActivity {
             Estimate estimate=new Estimate();
             estimate.setStartpoint("서울");
             EstimateAsycnTask asycnTask=new EstimateAsycnTask(estimate);
-            asycnTask.execute("http://192.168.219.101:7777/device/insert/estimate","POST");
+            asycnTask.execute("http://192.168.219.100:7777/device/insert/estimate","POST");
             startActivity(new Intent(this, EstimateResultActivity.class));
         }else {
             this.finish();

@@ -25,8 +25,6 @@ public class WriteBoardActivity extends AppCompatActivity{
         TAG=this.getClass().getSimpleName();
         viewPager=(ViewPager)findViewById(R.id.write_board_viewPager);
         writeBoardPageAdapter=new WriteBoardPageAdapter(getSupportFragmentManager());
-
-
         viewPager.setAdapter(writeBoardPageAdapter);
     }
     public void writeBoardBt(View view){

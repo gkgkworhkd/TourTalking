@@ -4,6 +4,7 @@ package com.example.user.TourTalking.calender;
  * Created by user on 2017-03-16.
  */
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -14,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.TextView;
@@ -36,7 +38,6 @@ import java.util.Locale;
 
 
 public class CalendarActivity extends AppCompatActivity {
-
     /**
      * 연/월 텍스트뷰
      */
@@ -63,7 +64,7 @@ public class CalendarActivity extends AppCompatActivity {
     private String TAG;
     private String selectDay;
     public String choiesDay;
-    Intent intent,intent2;
+    Intent intent, intent2;
     private TextView planTitle;
 
     /**
@@ -76,12 +77,11 @@ public class CalendarActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.calendar_activity);
         tvDate = (TextView) findViewById(R.id.tv_date);
         gridView = (GridView) findViewById(R.id.gridview);
-        planTitle=(TextView)findViewById(R.id.est_plan_title);
+        planTitle = (TextView) findViewById(R.id.est_plan_title);
 
 
         TAG = this.getClass().getSimpleName();
@@ -93,7 +93,7 @@ public class CalendarActivity extends AppCompatActivity {
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
         planTitle.setText("도착일을 선택해 주세요");
-        if (getIntent().getStringExtra("count").equals("0"))planTitle.setText("출발일을 선택해 주세요");
+        if (getIntent().getStringExtra("count").equals("0")) planTitle.setText("출발일을 선택해 주세요");
     }
 
 
@@ -117,26 +117,23 @@ public class CalendarActivity extends AppCompatActivity {
             init(date);
 
         } else if (id == R.id.calender_req) {
-            if(choiesDay!=null){
+            if (choiesDay != null) {
                 selectDay = selectDay + choiesDay;
                 if (getIntent().getStringExtra("count").equals("0")) {
                     intent = new Intent(this, EstimateActivity.estimateActivity.getClass());
                     intent.putExtra("arriveDay", selectDay);
-                    Log.d(TAG,"인텐트롤 보냇다");
                     startActivity(intent);
                 } else {
                     intent2 = new Intent(this, EstimateActivity.estimateActivity.getClass());
                     intent2.putExtra("depDay", selectDay);
                     startActivity(intent2);
                 }
-            }else {
-                Toast.makeText(this,"날자를 선택해 주세요",Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "날자를 선택해 주세요", Toast.LENGTH_SHORT).show();
             }
         }
 
     }
-
-
 
 
     public void init(Date date) {
@@ -197,14 +194,9 @@ public class CalendarActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
     public Action getIndexApiAction() {
         Thing object = new Thing.Builder()
-                .setName("Calendar Page") // TODO: Define a title for the content shown.
-                // TODO: Make sure this auto-generated URL is correct.
+                .setName("Calendar Page")
                 .setUrl(Uri.parse("http://[ENTER-YOUR-URL-HERE]"))
                 .build();
         return new Action.Builder(Action.TYPE_VIEW)
@@ -216,22 +208,10 @@ public class CalendarActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
         client.connect();
         AppIndex.AppIndexApi.start(client, getIndexApiAction());
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        AppIndex.AppIndexApi.end(client, getIndexApiAction());
-        client.disconnect();
-    }
 
     /**
      * 그리드뷰 어댑터
@@ -308,9 +288,16 @@ public class CalendarActivity extends AppCompatActivity {
             //오늘 day 가져옴
             Integer today = mCal.get(Calendar.DAY_OF_MONTH);
             String sToday = String.valueOf(today);
-            if (sToday.equals(getItem(position))) { //오늘 day 텍스트 컬러 변경
+            if (sToday.equals(getItem(position))) {
                 holder.tvItemGridView.setTextColor(Color.BLACK);
             }
+            if (position == 7 || position == 14 || position == 21 || position == 28|| position == 35|| position == 42) {
+                holder.tvItemGridView.setTextColor(Color.BLUE);
+            }
+            if (position == 6 || position == 13 || position == 20 || position == 27|| position == 34|| position == 41) {
+                holder.tvItemGridView.setTextColor(Color.RED);
+            }
+
             views.add(convertView);
             return convertView;
         }

@@ -30,10 +30,17 @@ public class BoardListAsycnTask extends AsyncTask<String, Void, String> {
     URL url;
     HttpURLConnection con;
     String TAG;
-    ArrayList<TrvBoard> trvList=new ArrayList<TrvBoard>();
+    BoardActivity boardActivity;
+    ArrayList<TrvBoard> trvList = new ArrayList<TrvBoard>();
+
     public BoardListAsycnTask(Context c) {
         TAG = this.getClass().getSimpleName();
-        activity=(BoardListActivity)c;
+        activity = (BoardListActivity) c;
+    }
+
+    public BoardListAsycnTask(BoardActivity boardActivity) {
+        TAG = this.getClass().getSimpleName();
+        this.boardActivity = boardActivity;
     }
 
     @Override
@@ -133,7 +140,9 @@ public class BoardListAsycnTask extends AsyncTask<String, Void, String> {
         } catch (JSONException e) {
             e.printStackTrace();
         } finally {
-            activity.init();
+            if (activity != null) {
+                activity.init();
+            }
         }
     }
 

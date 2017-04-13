@@ -1,11 +1,15 @@
 package com.example.user.TourTalking.estimate;
 
 import android.content.Intent;
-import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.PopupMenu;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckedTextView;
 import android.widget.ImageView;
@@ -14,9 +18,6 @@ import android.widget.TextView;
 import com.example.user.TourTalking.R;
 import com.example.user.TourTalking.calender.CalendarActivity;
 import com.example.user.TourTalking.country_list.CompanyLsitAsycnTask;
-import com.example.user.TourTalking.sharing.MainActivity;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -26,18 +27,17 @@ import java.util.ArrayList;
 
 
 public class EstimateActivity extends AppCompatActivity {
-    TextView s, b, plan;
-    ImageView s_image, b_image;
+    private TextView plan, arrvePlan;
     private String finshDay;
     private String depAriplane;
     private String TAG;
-    String arrvieDay;
-    String depDay;
-    String startDay;
-    String destName;
-
+    private String arrvieDay;
+    private String depDay;
+    private String startDay;
+    private String destName;
+    EstimatePayCountAsycnTask asycnTask;
     boolean flag;
-    String cityName;
+    private String cityName;
     public static final int CHCOMPNAY = 11;
     private TextView destTextView;
     private CheckedTextView tour, rest, business, golf, sea, leisure, check_near_air, check_near_downtw, check_near_tour, check_near_sea, check_cheap, check_luxury;
@@ -45,7 +45,25 @@ public class EstimateActivity extends AppCompatActivity {
     public static EstimateActivity estimateActivity;
     private int count = 0;
 
+
+    private String apName;
+    private TextView apText;
     private boolean choiceCompany;
+    String companyName;
+
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            Bundle bundle = msg.getData();
+            String individual = bundle.getString("indiviPay");
+            indiviPay.setText(individual);
+        }
+    };
+    TextView adultCount;
+    TextView childCount;
+    TextView totalPay;
+    TextView indiviPay;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,8 +75,21 @@ public class EstimateActivity extends AppCompatActivity {
         intent.putExtra("type", true);
         startActivity(intent);*/
         init();
-        cityName = getIntent().getStringExtra("cityName");
-       //Log.d(TAG, cityName + "의 값은? ");
+        if (getIntent().getStringExtra("cityName") != null) {
+
+            cityName = getIntent().getStringExtra("cityName");
+            destTextView.setText(cityName);
+        } else if (getIntent().getStringExtra("countryName") != null) {
+
+            cityName = getIntent().getStringExtra("countryName");
+            destTextView.setText(cityName);
+        } else if (getIntent().getStringExtra("companyName") != null) {
+
+            companyName = getIntent().getStringExtra("companyName");
+            destTextView.setText(companyName);
+        }
+
+        //Log.d(TAG, cityName + "의 값은? ");
 
     }
 
@@ -88,17 +119,20 @@ public class EstimateActivity extends AppCompatActivity {
             startDay = makePlan(arrvieDay);
             Log.d(TAG, "출발날자는 : " + startDay);
             plan.setText(startDay);
-            count = 1;
-            startActivity(new Intent(this, CalendarActivity.class).putExtra("count", "" + count + ""));
         } else if (depDay != null) {
             finshDay = makePlan(depDay);
-            plan.append("~" + finshDay);
+            arrvePlan.setText(finshDay);
         }
         if ((destName = intent.getStringExtra("countName")) != null) {
             destTextView.setText(destName);
         }
         if (intent.getBooleanExtra("choiceCompany", true)) {
             choiceCompany = true;
+        }
+
+        if ((apName = intent.getStringExtra("apName")) != null) {
+            apText.setText(apName);
+
         }
         //Log.d(TAG, choiceCompany + "의 값은? ");
     }
@@ -129,6 +163,14 @@ public class EstimateActivity extends AppCompatActivity {
         check_cheap = (CheckedTextView) findViewById(R.id.check_cheap);
         check_luxury = (CheckedTextView) findViewById(R.id.check_luxury);
         destTextView = (TextView) findViewById(R.id.est_destName);
+        apText = (TextView) findViewById(R.id.est_depature);
+
+        adultCount = (TextView) findViewById(R.id.est_adult);
+        childCount = (TextView) findViewById(R.id.est_child);
+        totalPay = (TextView) findViewById(R.id.est_totalpay);
+        indiviPay = (TextView) findViewById(R.id.est_indivipay);
+
+
         checkedTextViews = new ArrayList<CheckedTextView>();
         checkedTextViews.add(tour);
         checkedTextViews.add(rest);
@@ -140,14 +182,21 @@ public class EstimateActivity extends AppCompatActivity {
         checkedTextViews.add(check_near_downtw);
         checkedTextViews.add(check_near_tour);
         checkedTextViews.add(check_near_sea);
+
+
         makeCheck();
 
 
-        s = (TextView) findViewById(R.id.est_s);
+        /*s = (TextView) findViewById(R.id.est_s);
         s_image = (ImageView) findViewById(R.id.est_s_img);
         b = (TextView) findViewById(R.id.est_b);
-        b_image = (ImageView) findViewById(R.id.est_b_img);
+        b_image = (ImageView) findViewById(R.id.est_b_img);*/
         plan = (TextView) findViewById(R.id.est_plan);
+        arrvePlan = (TextView) findViewById(R.id.est_plan_arrve);
+
+        asycnTask=new EstimatePayCountAsycnTask(this);
+        asycnTask.adultFlag=true;
+        asycnTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
     public void estimateCheck(View view) {
@@ -170,13 +219,19 @@ public class EstimateActivity extends AppCompatActivity {
                 }
                 break;
             case R.id.check_request:
-                if (cityName==null) {
+                if (cityName == null) {
                     startActivity(new Intent(this, EstimatePopupActivity.class));
-
+                    asycnTask.adultFlag=false;
+                    this.finish();
                 } else {
-                    Log.d(TAG,cityName+"은?");
+                    Log.d(TAG, cityName + "은?");
                     CompanyLsitAsycnTask companyLsitAsycnTask = new CompanyLsitAsycnTask(this, CHCOMPNAY);
-                    companyLsitAsycnTask.execute("http://192.168.219.101:7777/device/compList?city_name=", "GET", cityName);
+                    Log.d(TAG, companyLsitAsycnTask + "은?");
+                    companyLsitAsycnTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,"http://192.168.219.100:7777/device/compList?city_name=", "GET", "테스트 지역1");
+                    Log.d(TAG, "excute실행");
+                    asycnTask.adultFlag=false;
+                    this.finish();
+
                 }
 
         }
@@ -189,7 +244,7 @@ public class EstimateActivity extends AppCompatActivity {
                 Intent intent2 = new Intent(this, EstimateCountryListActivity.class);
                 startActivity(intent2);
                 break;
-            case R.id.est_b:
+           /* case R.id.est_b:
                 b.setTextColor(Color.parseColor("#769dff"));
                 s.setTextColor(Color.parseColor("#FFBFBFBF"));
                 s_image.setImageResource(0);
@@ -202,13 +257,31 @@ public class EstimateActivity extends AppCompatActivity {
                 b_image.setImageResource(0);
                 s_image.setImageResource(R.drawable.check);
                 depAriplane = s.getText().toString();
-                break;
+                break;*/
             case R.id.est_plan:
                 Intent intent = new Intent(this, CalendarActivity.class);
+                count = 0;
                 intent.putExtra("count", "" + count + "");
                 this.startActivity(intent);
                 break;
-
+            case R.id.est_plan_arrve:
+                count = 1;
+                startActivity(new Intent(this, CalendarActivity.class).putExtra("count", "" + count + ""));
+                break;
+            case R.id.est_depature:
+                //startActivity(new Intent(this, EstimateDeparture.class));
+                PopupMenu p = new PopupMenu(
+                        getApplicationContext(),view);
+                getMenuInflater().inflate(R.menu.departure, p.getMenu());
+                p.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        apText.setText(item.getTitle().toString());
+                        return false;
+                    }
+                });
+                p.show();
+                break;
         }
     }
 }

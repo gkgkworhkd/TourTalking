@@ -17,7 +17,7 @@ public class CityListLayout extends LinearLayout{
         super(context);
         setOrientation(LinearLayout.HORIZONTAL);
         textView=new TextView(context);
-        textView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, 120));
+        textView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         setPadding(5,5,0,5);
         textView.setBackgroundColor(Color.parseColor("#eaeaea"));
         textView.setTextColor(Color.parseColor("#919191"));

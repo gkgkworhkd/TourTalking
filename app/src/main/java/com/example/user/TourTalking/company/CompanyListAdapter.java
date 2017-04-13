@@ -2,6 +2,7 @@ package com.example.user.TourTalking.company;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -91,11 +92,11 @@ public class CompanyListAdapter extends BaseAdapter {
         } else {
 
             if(type == EstimateActivity.CHCOMPNAY){
-                EstiCompanyItem item= (EstiCompanyItem) view;
-                item.setDto(dto);
+                EstiCompanyItem item= new EstiCompanyItem(context,dto);
+                view=item;
             }else {
-                CompanyItem item = (CompanyItem) view;
-                item.setDto(dto);
+                CompanyItem item = new CompanyItem(context,dto);
+                view=item;
             }
 
             convertView = view;

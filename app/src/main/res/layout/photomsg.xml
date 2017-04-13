@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#eaeaea"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="10dp"
+        android:layout_weight="1"
+        android:text="사진에 대한 내용을 입력해주세요~"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9"
+        android:background="#FFFFFF"
+        android:gravity="top|left"
+        android:hint="50자 이내로 입력 바랍니다."
+        android:inputType="textMultiLine"
+        android:lines="5"
+        android:padding="20dp"
+        android:scrollHorizontally="false" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/rounded_chat_send"
+        android:gravity="center"
+        android:text="등록"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+</LinearLayout>

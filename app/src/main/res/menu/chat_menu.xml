@@ -5,12 +5,17 @@
 
     <item
         android:id="@+id/req_est"
-        app:showAsAction="never"
-        android:title="견적요청"
-        />
+        android:title="친구목록 편집"
+        app:showAsAction="never" />
     <item
-        android:id="@+id/req_back"
-        app:showAsAction="never"
-        android:title="뒤로가기"
-        />
+        android:title="친구관리"
+        app:showAsAction="never" />
+    <item
+        android:title="그룹 만들기"
+        app:showAsAction="never" />
+    <item
+        android:title="그룹 관리"
+        app:showAsAction="never" />
+
+
 </menu>

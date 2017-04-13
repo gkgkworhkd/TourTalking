@@ -201,7 +201,7 @@ public class Fragments extends android.support.v4.app.Fragment {
         HashMap<Integer, ArrayList<ArrayList<City>>> city = new HashMap<Integer, ArrayList<ArrayList<City>>>();
         countries = (ArrayList<Country>) list.get("country");
 
-        for (int i = 0; i < conti.size(); i++) {
+         for (int i = 0; i < conti.size(); i++) {
             contiDto = conti.get(i);
             int countiId = contiDto.getContinent_id();
             listDataHeader.add(contiDto.getContinent_name());

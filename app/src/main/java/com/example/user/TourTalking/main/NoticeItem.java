@@ -2,7 +2,9 @@ package com.example.user.TourTalking.main;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Parcelable;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -68,7 +70,7 @@ public class NoticeItem extends LinearLayout implements View.OnClickListener {
         itemName.setText(companyBoard.getCompany_name());
         itemTitle.setText(companyBoard.getCompany_board_title());
         asycnTask = new ImageAsycnTask(this);
-        asycnTask.execute(companyBoard.getImage_url());
+        asycnTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,companyBoard.getImage_url());
         asycnTask = null;
         type = COMPBOARD;
     }
@@ -79,7 +81,7 @@ public class NoticeItem extends LinearLayout implements View.OnClickListener {
         itemTitle.setText(trvBoard.getTrv_board_title());
         if (trvBoard.getTrvImageUrl().size() != 0) {
             asycnTask = new ImageAsycnTask(this);
-            asycnTask.execute(trvBoard.getTrvImageUrl().get(0).getImage_url());
+            asycnTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,trvBoard.getTrvImageUrl().get(0).getImage_url());
         }
         type = TRVBOARD;
 
@@ -100,8 +102,8 @@ public class NoticeItem extends LinearLayout implements View.OnClickListener {
         intent.putExtra("type", type);
         intent.putParcelableArrayListExtra("data", datas);
         context.startActivity(intent);
-        MainActivity mainActivity = (MainActivity) context;
-        mainActivity.overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.fade_out);
+        AppCompatActivity activity = (AppCompatActivity) context;
+        activity.overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.fade_out);
     }
     public Parcelable getDto(){
         return this.dto;

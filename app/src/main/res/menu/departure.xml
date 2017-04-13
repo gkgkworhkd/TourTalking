@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:title="김포공항"
+        app:showAsAction="never" />
+    <item
+        android:title="인천 국제공항"
+        app:showAsAction="never" />
+    <item
+        android:title="제주 국제공항"
+        app:showAsAction="never" />
+    <item
+        android:title="김해 국제공항"
+        app:showAsAction="never" />
+    <item
+        android:title="무안 국제공항"
+        app:showAsAction="never" />
+</menu>

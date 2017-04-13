@@ -10,7 +10,6 @@ import android.widget.ListView;
 
 import com.example.user.TourTalking.R;
 import com.example.user.TourTalking.company.CompanyListAdapter;
-import com.example.user.TourTalking.country_list.CompanyLsitAsycnTask;
 import com.example.user.TourTalking.domain.Company;
 
 import java.util.ArrayList;
@@ -45,5 +44,7 @@ public class EstimateChoiceCompanyActivity extends AppCompatActivity {
         }
         Log.d(TAG, selectCompId.size() + "선택된 아이템 게수는~/");
         startActivity(new Intent(this, EstimatePopupActivity.class));
+
+        this.finish();
     }
 }

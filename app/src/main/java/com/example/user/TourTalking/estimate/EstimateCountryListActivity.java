@@ -1,20 +1,23 @@
 package com.example.user.TourTalking.estimate;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
 import com.example.user.TourTalking.R;
 import com.example.user.TourTalking.sharing.InitAsycnTask;
 import com.example.user.TourTalking.sharing.MainActivity;
+import com.example.user.TourTalking.sharing.MyAppCompatActivity;
 
 /**
  * Created by user on 2017-03-20.
  */
 
-public class EstimateCountryListActivity extends AppCompatActivity{
+public class EstimateCountryListActivity extends MyAppCompatActivity {
     EstmateViewPager estmateViewPager;
     ViewPager viewPager;
     public InitAsycnTask initAsycnTask;
@@ -27,7 +30,8 @@ public class EstimateCountryListActivity extends AppCompatActivity{
         setContentView(R.layout.estimate_complist_activity);
         estimateCountryListActivity=this;
         initAsycnTask = new InitAsycnTask(this);
-        initAsycnTask.execute("http://192.168.219.101:7777/device/init", "GET");
+        initAsycnTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,"http://192.168.219.100:7777/device/init", "GET");
+        setSupportActionBar((Toolbar)findViewById(R.id.toolbar));
     }
 
 

@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.user.TourTalking">
+
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-sdk
+        android:maxSdkVersion="23"
+        android:minSdkVersion="15"></uses-sdk>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -14,8 +18,7 @@
         -->
         <activity
             android:name="com.example.user.TourTalking.sharing.MainActivity"
-            android:windowSoftInputMode="adjustPan"
-            >
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -26,27 +29,33 @@
         <activity android:name="com.example.user.TourTalking.profile.ProfileActivity" />
         <activity
             android:name="com.example.user.TourTalking.chat.ChatActivity"
-            android:windowSoftInputMode="adjustPan">
-        </activity>
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"></activity>
         <activity android:name=".board.BoardActivity"></activity>
         <activity android:name=".board.BoardListActivity" />
         <activity
             android:name=".estimate.EstimateActivity"
             android:launchMode="singleTask"></activity>
         <activity android:name=".estimate.EstimateCountryListActivity"></activity>
-        <activity android:name=".calender.CalendarActivity">
-        </activity><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
+        <activity android:name=".calender.CalendarActivity"
+            android:theme="@style/Theme.AppCompat.Light.Dialog"
+            ></activity><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+
         <activity
             android:name=".estimate.EstimatePopupActivity"
-            android:theme="@style/Animation.AppCompat.Dialog"
-            ></activity>
-        <activity android:name=".estimate.EstimateResultActivity"/>
-        <activity android:name=".estimate.EstimateChoiceCompanyActivity"/>
-        <activity android:name=".writeboard.WriteBoardActivity">
+            android:theme="@style/Animation.AppCompat.Dialog"></activity>
+        <activity android:name=".estimate.EstimateResultActivity" />
+        <activity android:name=".estimate.EstimateChoiceCompanyActivity" />
+        <activity android:name=".writeboard.WriteBoardActivity"></activity>
+        <activity android:name=".estimate.EstimateDeparture" />
+        <activity android:name=".login.LoginActivity" />
+        <activity android:name=".login.RegistActivity" />
+        <activity
+            android:name=".writeboard.WriteTrvBoardActivity"
+            android:launchMode="singleTask">
         </activity>
     </application>
 

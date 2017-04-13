@@ -4,7 +4,6 @@
     android:layout_height="fill_parent"
     android:background="@drawable/profile">
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -16,12 +15,14 @@
             android:layout_height="match_parent"
             android:layout_gravity="top"
             android:layout_weight="1">
-        <ImageView
-            android:id="@+id/profile_image"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+
+            <ImageView
+                android:id="@+id/profile_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
         </LinearLayout>
+
         <LinearLayout
 
             android:layout_width="match_parent"
@@ -34,20 +35,18 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:text="1:1채팅"
+                android:gravity="center"
                 android:onClick="Profile_click"
-                />
+                android:text="1:1채팅" />
 
             <TextView
                 android:id="@+id/profile_content"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:text="회사상품"
+                android:gravity="center"
                 android:onClick="Profile_click"
-                />
+                android:text="회사상품" />
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -63,11 +62,11 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="bottom|center"
                         android:text="평점 4.5"
                         android:textSize="20sp"
                         android:textStyle="bold" />
-
                 </LinearLayout>
 
                 <LinearLayout
@@ -80,27 +79,33 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
+                        android:scaleType="fitStart"
                         android:src="@drawable/star1" />
 
                     <ImageView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
+                        android:scaleType="fitStart"
                         android:src="@drawable/star1" />
 
                     <ImageView
+                        android:scaleType="fitStart"
+                        android:id="@+id/imageView4"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:src="@drawable/star1" />
 
                     <ImageView
+                        android:scaleType="fitStart"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:src="@drawable/star1" />
 
                     <ImageView
+                        android:scaleType="fitStart"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -112,20 +117,16 @@
                         android:layout_weight="1" />
 
                 </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"></LinearLayout>
-
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
     <ImageView
-        android:background="@drawable/profileimage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:background="@drawable/profileimage"
         android:src="@drawable/star" />
+
+    <include layout="@layout/main_toolbar" />
 </FrameLayout>

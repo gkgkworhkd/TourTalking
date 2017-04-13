@@ -17,8 +17,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.user.TourTalking.R;
+import com.example.user.TourTalking.domain.Company;
 import com.example.user.TourTalking.estimate.EstimateActivity;
 import com.example.user.TourTalking.sharing.MainActivity;
+import com.example.user.TourTalking.sharing.MyAppCompatActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,6 +40,9 @@ public class ChatActivity extends AppCompatActivity {
     private Parcelable dto;
     private String groupType;
     private int group_id;
+    private TextView toolbarTitle;
+    private Toolbar toolbar;
+    private String toolbarName;
     /*
     * --------------------------상수
     * */
@@ -96,7 +101,7 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     public void reqEstimate(View view) {
-        Intent intent = new Intent(this, EstimateActivity.class);
+
         startActivity(intent);
     }
 
@@ -113,11 +118,23 @@ public class ChatActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
         sendMsg = (TextView) findViewById(R.id.message);
         parseIntent(getIntent());
+        toolbar = (Toolbar) findViewById(R.id.chat_toolbar);
+        setSupportActionBar(toolbar);
+        toolbarTitle=(TextView)toolbar.findViewById(R.id.chat_toolbar_title);
+        intent = new Intent(this, EstimateActivity.class);
+        if(getIntent().getStringExtra("countryName")!=null){
+            toolbarName=getIntent().getStringExtra("countryName");
+            intent.putExtra("countryName",toolbarName);
+        }else if(getIntent().getStringExtra("companyName")!=null){
+            toolbarName=getIntent().getStringExtra("companyName");
+            intent.putExtra("companyName",toolbarName);
+        }
+        toolbarTitle.setText(toolbarName+" 단체 채팅방");
     }
 
     public void connect() {
         asyncTask = new ChatAsyncTask(this);
-        asyncTask.execute("192.168.219.101", "8888", protocol);
+        asyncTask.execute("192.168.219.100", "8888", protocol);
     }
 
     public void parseIntent(Intent intent) {
@@ -126,18 +143,13 @@ public class ChatActivity extends AppCompatActivity {
             if ((groupType = intent.getStringExtra(GROUPTYPE)) != null) {
                 group_id = Integer.parseInt(intent.getStringExtra(COUNTRYID));
                 protocol = intent.getStringExtra("protocol");
-                Toolbar toolbar = (Toolbar) findViewById(R.id.chat_toolbar);
-                TextView toolText = (TextView) toolbar.findViewById(R.id.chat_toolbar_reqtext);
-                toolText.setText("");
-                setSupportActionBar(toolbar);
                 chatType = GRUOPCHAT;
                 Log.d(TAG, "그룹채팅 활성화");
                 Log.d(TAG, protocol);
 
             } else if ((dto = intent.getParcelableExtra(INDIVICHAT)) != null) {
-                Toolbar toolbar = (Toolbar) findViewById(R.id.chat_toolbar);
-                setSupportActionBar(toolbar);
                 chatType = INDIVICHAT;
+                protocol = intent.getStringExtra("protocol");
                 Log.d(TAG, "개인채팅 활성화");
             }
         }
@@ -171,34 +183,17 @@ public class ChatActivity extends AppCompatActivity {
         return item;
     }
 
-    private String getGroupProtocol(String msg) {
+
+
+
+    private String getIndividualProtocol(Company dto) {
         StringBuffer sb = new StringBuffer();
         sb.append("{");
-        sb.append("\"requestHeader\":{");
-        sb.append("\"chat-type\":\"group\",");
-        sb.append("\"group-type\":\"" + groupType + "\",");
-        sb.append("\"group-id\":" + group_id + ",");
-        sb.append("\"member-type\":\"" + MainActivity.mainActivity.memberInfo[0] + "\",");
-        sb.append("\"member-id\":\"" + MainActivity.mainActivity.memberInfo[1] + "\"");
-        sb.append("},");
-        sb.append("\"message\":\"" + msg + "\"");
-        sb.append("}");
-        return sb.toString();
-
-    }
-
-
-    private String getIndividualProtocol(String msg) {
-        StringBuffer sb = new StringBuffer();
-        sb.append("{");
-        sb.append("\"requestHeader\":{");
         sb.append("\"chat-type\":\"individual\",");
         sb.append("\"target-type\":\"agency\",");
         sb.append("\"target-id\":2,");
         sb.append("\"member-type\":\"" + MainActivity.mainActivity.memberInfo[0] + "\",");
         sb.append("\"member-id\":" + Integer.parseInt(MainActivity.mainActivity.memberInfo[1]) + "");
-        sb.append("},");
-        sb.append("\"message\":\"" + msg + "\"");
         sb.append("}");
         return sb.toString();
     }

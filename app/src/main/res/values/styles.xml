@@ -11,5 +11,11 @@
     <style name="IntroTheme" parent="Theme.AppCompat.Light.NoActionBar" >
         <item name="android:background">@drawable/main</item>
     </style>
+    <style name="TextStyle">
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="NoTitleDialog" parent="Theme.AppCompat.Light.Dialog">
+        <item name="windowNoTitle">true</item>
+    </style>
 
 </resources>

@@ -17,9 +17,11 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 /**
@@ -32,9 +34,13 @@ public class FriendLsitAsycnTask extends AsyncTask<String, Void, String> {
     private HttpURLConnection con;
     private String TAG;
     private String cityName;
+
     public FriendLsitAsycnTask(Context context) {
         this.context = context;
     }
+
+    private String destUrl;
+
 
     @Override
     protected void onPreExecute() {
@@ -45,9 +51,14 @@ public class FriendLsitAsycnTask extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... params) {
         StringBuffer sb = null;
         BufferedReader buffr = null;
-        cityName=params[2];
         try {
-            url = new URL(params[0]+params[2]);
+            destUrl = URLEncoder.encode(params[2], "utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        cityName = params[2];
+        try {
+            url = new URL(params[0] + destUrl);
             con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod(params[1]);
             con.setDoInput(true);

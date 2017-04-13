@@ -15,8 +15,12 @@ import com.example.user.TourTalking.List.FriendLsitAsycnTask;
 import com.example.user.TourTalking.List.ListActivity;
 import com.example.user.TourTalking.R;
 import com.example.user.TourTalking.board.BoardListActivity;
+import com.example.user.TourTalking.login.LoginActivity;
 
-public class MainActivity extends AppCompatActivity {
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
+public class MainActivity extends MyAppCompatActivity {
     private String TAG;
     private Toolbar toolbar;
     private MyPagerAdapter myPagerAdapter;
@@ -24,17 +28,17 @@ public class MainActivity extends AppCompatActivity {
     static public MainActivity mainActivity;
     private BackPressCloseHandler backPressCloseHandler;
     public InitAsycnTask initAsycnTask;
-    boolean isRunIntro=true;
+    boolean isRunIntro = true;
     //TODO 임시 MEMBERTYPE&PK
-    String memberType="coustomer";
-    String member_pk="손님";
+    private String memberType;
+    private String member_pk;
     Bundle savedInstanceState;
-    public String[] memberInfo={memberType,member_pk};
-    public Handler handler=new Handler();
+    public String[] memberInfo = {memberType, member_pk};
+    public Handler handler = new Handler();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.savedInstanceState=savedInstanceState;
+        this.savedInstanceState = savedInstanceState;
         TAG = getClass().getSimpleName();
         mainActivity = this;
         setContentView(R.layout.intro_activity);
@@ -47,6 +51,15 @@ public class MainActivity extends AppCompatActivity {
         //startActivity(new Intent(L));
     }
 
+    public void setMember_pk(String member_pk) {
+        this.member_pk = member_pk;
+    }
+    public void setMemberType(String member_pk){
+        this.member_pk=member_pk;
+    }
+    public String getMember_pk(){
+        return member_pk;
+    }
 
     private void beforeIntro() {
         // 약 2초간 인트로 화면을 출력.
@@ -72,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.main_activity);
 
         initAsycnTask = new InitAsycnTask(MainActivity.mainActivity);
-        initAsycnTask.execute("http://192.168.219.101:7777/device/init", "GET");
+        initAsycnTask.execute("http://192.168.219.100:7777/device/init", "GET");
 
     }
 
@@ -91,33 +104,19 @@ public class MainActivity extends AppCompatActivity {
         backPressCloseHandler = new BackPressCloseHandler(this);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu, menu);
-
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     public void MainBt(View view) {
         switch (view.getId()) {
             case R.id.talk_img:
-                FriendLsitAsycnTask asycnTask=new FriendLsitAsycnTask(this);
+                FriendLsitAsycnTask asycnTask = new FriendLsitAsycnTask(this);
                 //TODO 친구목록을 요청하는 서버 작업및 요청
-                asycnTask.execute("http://192.168.219.101:7777/device/compList?city_name=", "GET","테스트2-1");
+                asycnTask.execute("http://192.168.219.100:7777/device/compList?city_name=", "GET", "테스트 지역1");
                 break;
             case R.id.trv_img:
                 viewPager.setCurrentItem(1);
                 break;
             case R.id.board:
-                Intent intent1=new Intent(this, BoardListActivity.class);
+                Intent intent1 = new Intent(this, BoardListActivity.class);
                 startActivity(intent1);
                 break;
             case R.id.home_toggle:

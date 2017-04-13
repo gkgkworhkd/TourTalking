@@ -11,38 +11,90 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="15dp"
-        android:background="#FFFF"
-        android:layout_weight="0.8">
+        android:layout_weight="1"
+        android:background="#FFFF">
 
-        <ImageView
-            android:layout_marginBottom="6dp"
-            android:id="@+id/trv_img"
+        <LinearLayout
+            android:paddingRight="5dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="#eaeaea"
-            android:onClick="MainBt"
-            android:src="@drawable/earth" />
+            android:orientation="vertical">
 
-        <ImageView
-            android:layout_marginBottom="6dp"
-            android:id="@+id/talk_img"
+            <ImageView
+
+                android:id="@+id/trv_img"
+                android:layout_weight="3"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginBottom="6dp"
+                android:onClick="MainBt"
+                android:src="@drawable/earth" />
+
+            <TextView
+                android:textSize="12dp"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="투어토킹 지역"
+                android:id="@+id/textView18" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="#eaeaea"
-            android:onClick="MainBt"
-            android:src="@drawable/chat" />
+            android:orientation="vertical">
 
-        <ImageView
-            android:layout_marginBottom="6dp"
-            android:id="@+id/board"
+            <ImageView
+                android:layout_weight="3"
+                android:id="@+id/talk_img"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginBottom="6dp"
+                android:onClick="MainBt"
+                android:src="@drawable/chat" />
+
+            <TextView
+                android:textSize="12dp"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="투어토킹 채팅" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:paddingLeft="5dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="#eaeaea"
-            android:onClick="MainBt"
-            android:src="@drawable/bag" />
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_weight="3"
+                android:id="@+id/board"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginBottom="6dp"
+                android:onClick="MainBt"
+                android:src="@drawable/bag" />
+
+            <TextView
+                android:textSize="12dp"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="투어토킹 상품" />
+
+        </LinearLayout>
+
+
     </LinearLayout>
 
     <LinearLayout
@@ -50,7 +102,7 @@
         android:layout_height="0dp"
         android:layout_margin="8dp"
         android:layout_marginTop="20dp"
-        android:layout_weight="4"
+        android:layout_weight="2"
         android:background="#ffffff"
         android:orientation="vertical">
 

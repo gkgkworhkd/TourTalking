@@ -1,9 +1,12 @@
 package com.example.user.TourTalking.List;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.user.TourTalking.R;
 import com.example.user.TourTalking.domain.ChatList;
@@ -27,7 +30,7 @@ public class ListAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return context.arr.size();
+        return context.arr.size() + 1;
     }
 
     @Override
@@ -43,21 +46,43 @@ public class ListAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = null;
-        Company company=(Company) context.arr.get(position);
+
         if (code == R.layout.chatlist_member_fragment) {
-            MemberList dto = new MemberList();
-            dto.setImg(company.getImage_url());
-            dto.setMember_id(company.getCompany_id());
-            dto.setNickName(company.getCompany_name());
-            view = new MemberItem(context, dto);
+            if (position == 0) {
+                LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                LinearLayout linearLayout = (LinearLayout) inflater.inflate(R.layout.member_list_header, null);
+                view = linearLayout;
+
+            } else {
+                Company company = (Company) context.arr.get(position - 1);
+                MemberList dto = new MemberList();
+                dto.setImg(company.getImage_url());
+                dto.setMember_id(company.getCompany_id());
+                dto.setNickName(company.getCompany_name());
+                view = new MemberItem(context, dto);
+                MyListViewOnItemClickListener listener=new MyListViewOnItemClickListener(context,R.layout.chatlist_member_fragment,company);
+                view.setOnClickListener(listener);
+            }
+
 
         } else if (code == R.layout.chatlist_list_fragment) {
-            ChatList dto = new ChatList();
-            dto.setNickName("고재광");
-            dto.setImg("이미지이름.jpg");
-            dto.setContent("어제 뭐했어??");
-            view = new ListItem(context, dto);
+            if (position == 0) {
+                LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                LinearLayout linearLayout = (LinearLayout) inflater.inflate(R.layout.member_list_header, null);
+                TextView textView=(TextView)linearLayout.findViewById(R.id.member_header_title);
+                textView.setText("");
+                view = linearLayout;
+
+            } else {
+                Company company = (Company) context.arr.get(position - 1);
+                ChatList dto = new ChatList();
+                dto.setNickName("고재광");
+                dto.setImg("이미지이름.jpg");
+                dto.setContent("어제 뭐했어??");
+                view = new ListItem(context, dto);
+            }
         }
+
         return view;
     }
 

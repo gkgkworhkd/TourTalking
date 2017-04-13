@@ -42,13 +42,8 @@ public class BoardListViewAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = null;
         TrvBoard dto = list.get(position);
-
-        if(convertView==null){
-            view = new NoticeItem(context, dto, Fragments.TRV_ITEM);
-        }else {
-            NoticeItem noticeItem=(NoticeItem) view;
-            noticeItem.setDto(dto);
-            noticeItem.setCode(Fragments.TRV_ITEM);
+        view = new NoticeItem(context, dto, Fragments.TRV_ITEM);
+        if(convertView!=null){
             convertView=view;
         }
 

@@ -25,6 +25,7 @@
                 android:layout_weight="3"
                 android:orientation="vertical">
                 <TextView
+                    android:textSize="17dp"
                     android:id="@+id/title"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"

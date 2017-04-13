@@ -20,7 +20,6 @@ public class ListFragments extends Fragment {
     private String TAG;
     ListView chat_listView;
     ListActivity context;
-    MyListViewOnItemClickListener listener;
     public ListFragments() {
         TAG = this.getClass().getSimpleName();
         Log.d(TAG, "ListFragments 가 실행됨");
@@ -41,8 +40,6 @@ public class ListFragments extends Fragment {
             chat_listView = (ListView) view.findViewById(R.id.listView_chatList);
         }
         ListAdapter listAdapter = new ListAdapter(context, id);
-        listener=new MyListViewOnItemClickListener(context,id);
-        chat_listView.setOnItemClickListener(listener);
         chat_listView.setAdapter(listAdapter);
         return view;
     }

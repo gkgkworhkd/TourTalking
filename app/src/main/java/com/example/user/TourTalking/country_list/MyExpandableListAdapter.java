@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.os.AsyncTask;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,8 @@ import com.example.user.TourTalking.estimate.EstimateActivity;
 import com.example.user.TourTalking.estimate.EstimateCountryListActivity;
 import com.example.user.TourTalking.sharing.ImageAsycnTask;
 import com.example.user.TourTalking.sharing.MainActivity;
+
+import org.apmem.tools.layouts.FlowLayout;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -85,7 +88,7 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
                              boolean isLastChild, View convertView, ViewGroup parent) {
 
         final Country country = (Country) getChild(groupPosition, childPosition);
-        final ArrayList<City> city = (ArrayList<City>) getCityChild(groupPosition, childPosition);
+        ArrayList<City> city = (ArrayList<City>) getCityChild(groupPosition, childPosition);
         //final List childCityText = myGetChild(groupPosition);
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this._context
@@ -94,14 +97,34 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
         }
 
 
-        LinearLayout linearLayout = (LinearLayout) convertView.findViewById(R.id.libListItem);
+        FlowLayout linearLayout = (FlowLayout) convertView.findViewById(R.id.libListItem);
         TextView chat_name = (TextView) convertView.findViewById(R.id.country_chat_name);
         ImageView country_img = (ImageView) convertView.findViewById(R.id.country_img);
         ImageAsycnTask imageAsycnTask = new ImageAsycnTask(country_img, 50);
 
         countryName = country.getCountry_name();
+        chat_name.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         chat_name.setText(countryName);
         chat_name.append(" 단체 채팅방");
+        country_img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (MainActivity.mainActivity.memberInfo[0] == null) {
+                    //TODO 비로그인시 알림창 활성화
+                    Log.d(TAG, "로그인 후 사용하실수있는 메뉴입니다.");
+                } else {
+                    Intent intent = new Intent(_context, ChatActivity.class);
+                    Log.d(TAG, country.getCountry_id() + "선택된 도시의 아이디");
+                    intent.putExtra(ChatActivity.COUNTRYID, Integer.toString(country.getCountry_id()));
+                    intent.putExtra(ChatActivity.GROUPTYPE, "country");
+                    intent.putExtra("countryName",country.getCountry_name());
+                    intent.putExtra("protocol",getProtocol(country.getCountry_id(),"country"));
+                    intent.putExtra("country",country);
+                    //TODO 로그인된 맴버 PK 전송
+                    _context.startActivity(intent);
+                }
+            }
+        });
         chat_name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,7 +136,9 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
                     Log.d(TAG, country.getCountry_id() + "선택된 도시의 아이디");
                     intent.putExtra(ChatActivity.COUNTRYID, Integer.toString(country.getCountry_id()));
                     intent.putExtra(ChatActivity.GROUPTYPE, "country");
-                    intent.putExtra("protocol",getProtocol(country));
+                    intent.putExtra("countryName",country.getCountry_name());
+                    intent.putExtra("protocol",getProtocol(country.getCountry_id(),"country"));
+                    intent.putExtra("country",country);
                     //TODO 로그인된 맴버 PK 전송
                     _context.startActivity(intent);
                 }
@@ -122,14 +147,17 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
         //String[] cityName = (String[]) childText[1]);\
         linearLayout.removeAllViews();
         if (city.size() != 0) {
+            linearLayout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             for (int i = 0; i < city.size(); i++) {
                 final String cityName = city.get(i).getCity_name();
-                linearLayout.addView(getCityListLayout(cityName));
+                int city_id=city.get(i).getCity_id();
+                linearLayout.addView(getCityListLayout(cityName,city_id));
             }
         } else {
             //txtListChild.setText(childText);
             //linearLayout.addView(getCityListLayout(country.getCountry_name()));
-            linearLayout.addView(getCityListLayout(" "));
+            linearLayout.addView(getCityListLayout(" ",0));
+            linearLayout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,100));
            /* chat_name.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -140,16 +168,16 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
                 }
             });*/
         }
-        imageAsycnTask.execute(country.getCountry_image());
+        imageAsycnTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,country.getCountry_image());
         return convertView;
     }
 
-    public String getProtocol(Country country) {
+    static public String getProtocol(int country_id,String group_type) {
         StringBuffer sb = new StringBuffer();
         sb.append("{");
         sb.append("\"chat-type\":\"group\",");
-        sb.append("\"group-type\":\"" + "country" + "\",");
-        sb.append("\"group-id\":" + Integer.toString(country.getCountry_id()) + ",");
+        sb.append("\"group-type\":\"" + group_type + "\",");
+        sb.append("\"room-id\":" + Integer.toString(country_id) + ",");
         sb.append("\"member-type\":\"" + MainActivity.mainActivity.memberInfo[0] + "\",");
         sb.append("\"member-id\":\"" + MainActivity.mainActivity.memberInfo[1] + "\"");
         sb.append("}");
@@ -157,7 +185,7 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
     }
 
 
-    public CityListLayout getCityListLayout(final String text) {
+    public CityListLayout getCityListLayout(final String text, final int city_id) {
         CityListLayout listLayout = new CityListLayout(_context);
         listLayout.textView.setText(text);
         listLayout.textView.append(" ");
@@ -173,8 +201,8 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
             public void onClick(View v) {
                 Toast.makeText(_context, text + " 를 눌럿다", Toast.LENGTH_SHORT).show();
                 if (_context.equals(MainActivity.mainActivity)) {
-                    CompanyLsitAsycnTask companyLsitAsycnTask = new CompanyLsitAsycnTask(_context, 0);
-                    companyLsitAsycnTask.execute("http://192.168.219.101:7777/device/compList?city_name=", "GET", text);
+                    CompanyLsitAsycnTask companyLsitAsycnTask = new CompanyLsitAsycnTask(_context, 0,city_id);
+                    companyLsitAsycnTask.execute("http://192.168.219.100:7777/device/compList?city_name=", "GET",text);
                 } else if (_context.equals(EstimateCountryListActivity.estimateCountryListActivity)) {
                     _context.startActivity(new Intent(_context, EstimateActivity.class).putExtra("countName", countryName + " " + text));
                 }

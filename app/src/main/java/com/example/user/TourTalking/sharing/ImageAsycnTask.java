@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.widget.ImageView;
 
+import com.example.user.TourTalking.board.BoardCommentItem;
 import com.example.user.TourTalking.main.NoticeItem;
 
 import java.io.InputStream;

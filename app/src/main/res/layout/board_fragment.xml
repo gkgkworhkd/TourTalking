@@ -5,8 +5,8 @@
     android:background="#eaeaea"
     android:orientation="vertical">
 
-    <ScrollView
 
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="3">
@@ -79,17 +79,10 @@
             />
 
             <TextView
-                android:layout_marginTop="20dp"
                 android:id="@+id/trv_board_content"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-
-            <android.support.v4.view.ViewPager
-                android:id="@+id/board_trv_viewPager"
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:layout_weight="6"></android.support.v4.view.ViewPager>
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -99,20 +92,21 @@
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="0.8"
                     android:src="@drawable/before" />
 
                 <HorizontalScrollView
-                    android:layout_weight="6"
+                    android:id="@+id/tumbnail_scroll"
                     android:layout_width="0dp"
-                    android:layout_height="80dp">
+                    android:layout_height="80dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="6">
 
 
                     <LinearLayout
                         android:id="@+id/board_thumbnail_layout"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_gravity="center"
                         android:orientation="horizontal">
 
                     </LinearLayout>
@@ -122,11 +116,99 @@
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:onClick="writeBoardBt"
+                    android:layout_weight="0.8"
                     android:src="@drawable/next" />
             </LinearLayout>
 
+            <android.support.v4.view.ViewPager
+                android:id="@+id/board_trv_viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginTop="-10dp"></android.support.v4.view.ViewPager>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="#eaeaea"></LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="댓글 달기"
+                android:textSize="20dp"></TextView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/board_comment"
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="4"
+                    android:gravity="top|left"
+                    android:inputType="textMultiLine"
+                    android:lines="5"
+                    android:scrollHorizontally="false" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1">
+
+                    <Button
+                        android:id="@+id/board_comment_bt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="등록" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <ListView
+                android:id="@+id/board_comment_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
+                android:dividerHeight="0dp"></ListView>
+
+
+            <ListView
+                android:id="@+id/board_listView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></ListView>
+
         </LinearLayout>
+
     </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="10dp"
+        android:layout_weight="0.3"
+        android:background="@drawable/rounded_money"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/req_boarList"
+            android:layout_weight="3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="목록으로 가기"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="boardCompBt"
+            android:src="@drawable/write" />
+
+    </LinearLayout>
 </LinearLayout>

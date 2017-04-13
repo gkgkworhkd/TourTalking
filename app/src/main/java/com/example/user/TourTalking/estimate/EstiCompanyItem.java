@@ -1,6 +1,7 @@
 package com.example.user.TourTalking.estimate;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
@@ -36,7 +37,7 @@ public class EstiCompanyItem extends LinearLayout{
         compIntro.setText(dto.getCompany_intro());
         compName.setText(dto.getCompany_name());
         ImageAsycnTask imageAsycnTask=new ImageAsycnTask(compImage,270);
-        imageAsycnTask.execute(dto.getImage_url(),"GET");
+        imageAsycnTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,dto.getImage_url(),"GET");
     }
 
     public Company getDto() {
